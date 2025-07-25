@@ -7,6 +7,6 @@ import java.util.List;
 public interface MaterialService {
     List<Material> findAll();
     Material findById(Long id);
-    Material save(Material material);
-    Material update(Long id, Material material);
+    Material save(Material material, Long courseId);
+    Material update(Long id, Material material, Long courseId);
 }

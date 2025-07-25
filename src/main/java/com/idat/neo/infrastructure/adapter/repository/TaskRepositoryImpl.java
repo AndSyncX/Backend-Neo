@@ -37,14 +37,31 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public Task save(Task task) {
-        CourseData courseData = courseDataRepository.findById(task.course().id())
-                .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con id: " + task.course().id()));
+    public Task save(Task task, Long courseId) {
+        CourseData courseData = courseDataRepository.findById(courseId)
+                .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con id: " + courseId));
 
         TaskData taskData = taskMapper.toEntity(task);
         taskData.setCourseData(courseData);
 
         TaskData saved = taskDataRepository.save(taskData);
         return taskMapper.toDomain(saved);
+    }
+
+    @Override
+    public Task update(Long id, Task task, Long courseId) {
+        TaskData existingTaskData = taskDataRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tarea no encontrada con id: " + id));
+
+        CourseData courseData = courseDataRepository.findById(courseId)
+                .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con id: " + courseId));
+
+        existingTaskData.setTitle(task.title());
+        existingTaskData.setDescription(task.description());
+        existingTaskData.setDeliveryDate(task.deliveryDate());
+        existingTaskData.setCourseData(courseData);
+
+        TaskData updatedTaskData = taskDataRepository.save(existingTaskData);
+        return taskMapper.toDomain(updatedTaskData);
     }
 }

@@ -26,7 +26,7 @@ public class EnrollmentData {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private UserData student;
+    private UserData userData;
 
     @Column(name = "enrollment_date")
     private LocalDate enrollmentDate;

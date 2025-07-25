@@ -38,14 +38,16 @@ public class MaterialController {
 
     @PostMapping
     public ResponseEntity<MaterialResponseDTO> createMaterial(@RequestBody @Valid MaterialRequestDTO requestDTO) {
-        Material savedMaterial = materialService.save(materialDtoMapper.toDomain(requestDTO));
+        Material materialToSave = materialDtoMapper.toDomain(requestDTO);
+        Material savedMaterial = materialService.save(materialToSave, requestDTO.courseId());
         return ResponseEntity.status(HttpStatus.CREATED).body(materialDtoMapper.toDto(savedMaterial));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<MaterialResponseDTO> updateMaterial(@PathVariable Long id,
                                                           @RequestBody @Valid MaterialRequestDTO requestDTO) {
-        Material updated = materialService.update(id, materialDtoMapper.toDomain(requestDTO));
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(materialDtoMapper.toDto(updated));
+        Material materialToUpdate = materialDtoMapper.toDomain(requestDTO);
+        Material updatedMaterial = materialService.update(id, materialToUpdate, requestDTO.courseId());
+        return ResponseEntity.ok(materialDtoMapper.toDto(updatedMaterial));
     }
 }

@@ -1,9 +1,9 @@
 package com.idat.neo.application.usecase;
 
+import com.idat.neo.entrypoints.exception.EntityNotFoundException;
 import com.idat.neo.domain.model.Task;
 import com.idat.neo.domain.repository.TaskRepository;
 import com.idat.neo.domain.service.TaskService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,27 +23,26 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task findById(Long id) {
         return taskRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Tarea no encontrada con id" + id));
+                .orElseThrow(() -> new EntityNotFoundException("Tarea no encontrada con id " + id));
     }
 
     @Override
-    public Task save(Task task) {
-        return taskRepository.save(task);
+    public Task save(Task task, Long courseId) {
+        return taskRepository.save(task, courseId);
     }
 
     @Override
-    public Task update(Long id, Task task) {
-        Task existing = taskRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Task no encontrado con id: " + id));
+    public Task update(Long id, Task task, Long courseId) {
+        Task existingTask = findById(id);
 
         Task updatedTask = new Task(
-                id,
+                existingTask.id(),
                 task.course(),
                 task.title(),
                 task.description(),
                 task.deliveryDate()
         );
 
-        return taskRepository.save(updatedTask);
+        return taskRepository.update(id, updatedTask, courseId);
     }
 }

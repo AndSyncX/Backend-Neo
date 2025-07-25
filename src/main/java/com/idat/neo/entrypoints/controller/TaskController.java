@@ -38,14 +38,16 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<TaskResponseDTO> createTask(@RequestBody @Valid TaskRequestDTO requestDTO) {
-        Task savedTask = taskService.save(taskDtoMapper.toDomain(requestDTO));
+        Task taskToSave = taskDtoMapper.toDomain(requestDTO);
+        Task savedTask = taskService.save(taskToSave, requestDTO.courseId());
         return ResponseEntity.status(HttpStatus.CREATED).body(taskDtoMapper.toDto(savedTask));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<TaskResponseDTO> updateTask(@PathVariable Long id,
-                                                              @RequestBody @Valid TaskRequestDTO requestDTO) {
-        Task updated = taskService.update(id, taskDtoMapper.toDomain(requestDTO));
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(taskDtoMapper.toDto(updated));
+                                                      @RequestBody @Valid TaskRequestDTO requestDTO) {
+        Task taskToUpdate = taskDtoMapper.toDomain(requestDTO);
+        Task updatedTask = taskService.update(id, taskToUpdate, requestDTO.courseId());
+        return ResponseEntity.ok(taskDtoMapper.toDto(updatedTask));
     }
 }

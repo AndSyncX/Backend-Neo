@@ -3,7 +3,7 @@ package com.idat.neo.application.usecase;
 import com.idat.neo.domain.model.User;
 import com.idat.neo.domain.repository.UserRepository;
 import com.idat.neo.domain.service.UserService;
-import jakarta.persistence.EntityNotFoundException;
+import com.idat.neo.entrypoints.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,11 +33,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(String id, User user) {
-        User existing = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User no encontrado con id: " + id));
+        User existingUser = findById(id);
 
         User updatedUser = new User(
-                id,
+                existingUser.id(),
                 user.name(),
                 user.email(),
                 user.password(),
@@ -45,7 +44,7 @@ public class UserServiceImpl implements UserService {
                 user.enable()
         );
 
-        return userRepository.save(updatedUser);
+        return userRepository.update(id, updatedUser);
     }
 
     @Override

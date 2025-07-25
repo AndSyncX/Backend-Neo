@@ -3,7 +3,7 @@ package com.idat.neo.application.usecase;
 import com.idat.neo.domain.model.AssignmentDelivery;
 import com.idat.neo.domain.repository.AssignmentDeliveryRepository;
 import com.idat.neo.domain.service.AssignmentDeliveryService;
-import jakarta.persistence.EntityNotFoundException;
+import com.idat.neo.entrypoints.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,23 +27,22 @@ public class AssignmentDeliveryServiceImpl implements AssignmentDeliveryService 
     }
 
     @Override
-    public AssignmentDelivery save(AssignmentDelivery assignmentDelivery) {
-        return assignmentDeliveryRepository.save(assignmentDelivery);
+    public AssignmentDelivery save(AssignmentDelivery assignmentDelivery, Long taskId, String userId) {
+        return assignmentDeliveryRepository.save(assignmentDelivery, taskId, userId);
     }
 
     @Override
-    public AssignmentDelivery update(Long id, AssignmentDelivery assignmentDelivery) {
-        AssignmentDelivery existing = assignmentDeliveryRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Asignar tarea no encontrado con id: " + id));
+    public AssignmentDelivery update(Long id, AssignmentDelivery assignmentDelivery, Long taskId, String userId) {
+        AssignmentDelivery existingAssignmentDelivery = findById(id);
 
         AssignmentDelivery updatedAssignmentDelivery = new AssignmentDelivery(
-                id,
+                existingAssignmentDelivery.id(),
                 assignmentDelivery.task(),
                 assignmentDelivery.user(),
                 assignmentDelivery.file(),
                 assignmentDelivery.qualification()
         );
 
-        return assignmentDeliveryRepository.save(updatedAssignmentDelivery);
+        return assignmentDeliveryRepository.update(id, updatedAssignmentDelivery, taskId, userId);
     }
 }
