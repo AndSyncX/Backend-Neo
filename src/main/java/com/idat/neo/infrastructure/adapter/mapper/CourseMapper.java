@@ -5,7 +5,7 @@ import com.idat.neo.infrastructure.adapter.entity.CourseData;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CourseMapper {
 
     @Mapping(source = "userData", target = "user")

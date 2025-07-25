@@ -9,6 +9,4 @@ public interface EnrollmentRepository {
     List<Enrollment> findAll();
     Optional<Enrollment> findById(Long id);
     Enrollment save(Enrollment enrollment);
-    Enrollment update(Long id, Enrollment enrollment);
-    void deleteById(Long id);
 }

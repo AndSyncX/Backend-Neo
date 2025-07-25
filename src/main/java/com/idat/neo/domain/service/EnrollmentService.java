@@ -7,8 +7,7 @@ import java.util.Optional;
 
 public interface EnrollmentService {
     List<Enrollment> findAll();
-    Optional<Enrollment> findById(Long id);
+    Enrollment findById(Long id);
     Enrollment save(Enrollment enrollment);
     Enrollment update(Long id, Enrollment enrollment);
-    void deleteById(Long id);
 }

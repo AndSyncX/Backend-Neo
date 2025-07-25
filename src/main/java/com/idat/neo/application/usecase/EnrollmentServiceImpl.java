@@ -3,6 +3,7 @@ package com.idat.neo.application.usecase;
 import com.idat.neo.domain.model.Enrollment;
 import com.idat.neo.domain.repository.EnrollmentRepository;
 import com.idat.neo.domain.service.EnrollmentService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,9 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
-    public Optional<Enrollment> findById(Long id) {
-        return enrollmentRepository.findById(id);
+    public Enrollment findById(Long id) {
+        return enrollmentRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Inscripción no encontrado con id: " + id));
     }
 
     @Override
@@ -32,11 +34,6 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     @Override
     public Enrollment update(Long id, Enrollment enrollment) {
-        return enrollmentRepository.update(id, enrollment);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        enrollmentRepository.deleteById(id);
+        return null;
     }
 }

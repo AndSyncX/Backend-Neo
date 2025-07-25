@@ -3,6 +3,7 @@ package com.idat.neo.application.usecase;
 import com.idat.neo.domain.model.Material;
 import com.idat.neo.domain.repository.MaterialRepository;
 import com.idat.neo.domain.service.MaterialService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,9 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public Optional<Material> findById(Long id) {
-        return materialRepository.findById(id);
+    public Material findById(Long id) {
+        return materialRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Material no encontrado con id: " + id));
     }
 
     @Override
@@ -32,11 +34,6 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     public Material update(Long id, Material material) {
-        return materialRepository.update(id, material);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        materialRepository.deleteById(id);
+        return null;
     }
 }

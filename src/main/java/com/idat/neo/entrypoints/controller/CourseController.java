@@ -2,6 +2,10 @@ package com.idat.neo.entrypoints.controller;
 
 import com.idat.neo.domain.model.Course;
 import com.idat.neo.domain.service.CourseService;
+import com.idat.neo.entrypoints.dto.CourseRequestDTO;
+import com.idat.neo.entrypoints.dto.CourseResponseDTO;
+import com.idat.neo.infrastructure.adapter.mapper.CourseDtoMapper;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,28 +19,33 @@ import java.util.List;
 public class CourseController {
 
     private final CourseService courseService;
+    private final CourseDtoMapper courseDtoMapper;
 
     @GetMapping
-    ResponseEntity<List<Course>> getAllCourses(){
-        return ResponseEntity.ok(courseService.findAll());
+    public ResponseEntity<List<CourseResponseDTO>> getAllCourses(){
+        List<CourseResponseDTO> response = courseService.findAll()
+                .stream()
+                .map(courseDtoMapper::toDto)
+                .toList();
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<Course> getCourseById(@PathVariable("id") Long id){
-        return ResponseEntity.ok(courseService.findById(id));
+    ResponseEntity<CourseResponseDTO> getCourseById(@PathVariable("id") Long id){
+        Course course = courseService.findById(id);
+        return ResponseEntity.ok(courseDtoMapper.toDto(course));
     }
 
     @PostMapping
-    ResponseEntity<Course> createCourse(@RequestBody Course course){
-        return ResponseEntity
-                .status(HttpStatus.ACCEPTED)
-                .body(courseService.save(course));
+    public ResponseEntity<CourseResponseDTO> createCourse(@RequestBody @Valid CourseRequestDTO requestDTO) {
+        Course savedCourse = courseService.save(courseDtoMapper.toDomain(requestDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(courseDtoMapper.toDto(savedCourse));
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<Course> updateCourse(@PathVariable("id") Long id, @RequestBody Course course){
-        return ResponseEntity
-                .status(HttpStatus.ACCEPTED)
-                .body(courseService.update(id, course));
+    public ResponseEntity<CourseResponseDTO> updateCourse(@PathVariable Long id,
+                                                          @RequestBody @Valid CourseRequestDTO requestDTO) {
+        Course updated = courseService.update(id, courseDtoMapper.toDomain(requestDTO));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(courseDtoMapper.toDto(updated));
     }
 }

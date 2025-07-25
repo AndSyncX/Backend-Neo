@@ -1,13 +1,14 @@
 package com.idat.neo.application.usecase;
 
 import com.idat.neo.domain.model.AssignmentDelivery;
+import com.idat.neo.domain.model.Course;
 import com.idat.neo.domain.repository.AssignmentDeliveryRepository;
 import com.idat.neo.domain.service.AssignmentDeliveryService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,8 +22,9 @@ public class AssignmentDeliveryServiceImpl implements AssignmentDeliveryService 
     }
 
     @Override
-    public Optional<AssignmentDelivery> findById(Long id) {
-        return assignmentDeliveryRepository.findById(id);
+    public AssignmentDelivery findById(Long id) {
+        return assignmentDeliveryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Asignar tarea no encontrado con id: " + id));
     }
 
     @Override
@@ -32,11 +34,17 @@ public class AssignmentDeliveryServiceImpl implements AssignmentDeliveryService 
 
     @Override
     public AssignmentDelivery update(Long id, AssignmentDelivery assignmentDelivery) {
-        return assignmentDeliveryRepository.update(id, assignmentDelivery);
-    }
+        AssignmentDelivery existing = assignmentDeliveryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Asignar tarea no encontrado con id: " + id));
 
-    @Override
-    public void deleteById(Long id) {
-        assignmentDeliveryRepository.deleteById(id);
+        AssignmentDelivery updatedAssignmentDelivery = new AssignmentDelivery(
+                id,
+                assignmentDelivery.task(),
+                assignmentDelivery.user(),
+                assignmentDelivery.file(),
+                assignmentDelivery.qualification()
+        );
+
+        return assignmentDeliveryRepository.save(updatedAssignmentDelivery);
     }
 }

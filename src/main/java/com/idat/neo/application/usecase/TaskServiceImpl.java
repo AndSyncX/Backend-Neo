@@ -3,6 +3,7 @@ package com.idat.neo.application.usecase;
 import com.idat.neo.domain.model.Task;
 import com.idat.neo.domain.repository.TaskRepository;
 import com.idat.neo.domain.service.TaskService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Optional<Task> findById(Long id) {
-        return taskRepository.findById(id);
+    public Task findById(Long id) {
+        return taskRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tarea no encontrada con id" + id));
     }
 
     @Override
@@ -32,11 +34,6 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task update(Long id, Task task) {
-        return taskRepository.update(id, task);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        taskRepository.deleteById(id);
+        return null;
     }
 }

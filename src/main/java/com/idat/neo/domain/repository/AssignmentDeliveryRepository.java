@@ -9,6 +9,4 @@ public interface AssignmentDeliveryRepository {
     List<AssignmentDelivery> findAll();
     Optional<AssignmentDelivery> findById(Long id);
     AssignmentDelivery save(AssignmentDelivery assignmentDelivery);
-    AssignmentDelivery update(Long id, AssignmentDelivery assignmentDelivery);
-    void deleteById(Long id);
 }
