@@ -3,7 +3,6 @@ package com.idat.neo.domain.service;
 import com.idat.neo.domain.model.Enrollment;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface EnrollmentService {
     List<Enrollment> findAll();

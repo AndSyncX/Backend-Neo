@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
 public record CourseRequestDTO(
+
         @NotBlank(message = "El nombre del curso es obligatorio")
         @Size(max = 250, message = "El nombre no debe exceder los 250 caracteres")
         String name,

@@ -1,7 +1,6 @@
 package com.idat.neo.application.usecase;
 
 import com.idat.neo.domain.model.AssignmentDelivery;
-import com.idat.neo.domain.model.Course;
 import com.idat.neo.domain.repository.AssignmentDeliveryRepository;
 import com.idat.neo.domain.service.AssignmentDeliveryService;
 import jakarta.persistence.EntityNotFoundException;

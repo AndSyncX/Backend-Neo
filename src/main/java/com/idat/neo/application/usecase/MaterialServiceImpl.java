@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +33,17 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     public Material update(Long id, Material material) {
-        return null;
+        Material existing = materialRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Material no encontrado con id: " + id));
+
+        Material updatedMaterial = new Material(
+                id,
+                material.course(),
+                material.title(),
+                material.description(),
+                material.firebaseFileUrl()
+        );
+
+        return materialRepository.save(updatedMaterial);
     }
 }

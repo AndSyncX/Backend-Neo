@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +33,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(String id, User user) {
-        return null;
+        User existing = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User no encontrado con id: " + id));
+
+        User updatedUser = new User(
+                id,
+                user.name(),
+                user.email(),
+                user.password(),
+                user.role(),
+                user.enable()
+        );
+
+        return userRepository.save(updatedUser);
     }
 
     @Override

@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +33,17 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task update(Long id, Task task) {
-        return null;
+        Task existing = taskRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Task no encontrado con id: " + id));
+
+        Task updatedTask = new Task(
+                id,
+                task.course(),
+                task.title(),
+                task.description(),
+                task.deliveryDate()
+        );
+
+        return taskRepository.save(updatedTask);
     }
 }

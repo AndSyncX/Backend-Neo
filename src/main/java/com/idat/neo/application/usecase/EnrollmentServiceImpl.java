@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +33,16 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     @Override
     public Enrollment update(Long id, Enrollment enrollment) {
-        return null;
+        Enrollment existing = enrollmentRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Inscripción no encontrado con id: " + id));
+
+        Enrollment updatedEnrollment = new Enrollment(
+                id,
+                enrollment.course(),
+                enrollment.user(),
+                enrollment.enrollmentDate()
+        );
+
+        return enrollmentRepository.save(updatedEnrollment);
     }
 }

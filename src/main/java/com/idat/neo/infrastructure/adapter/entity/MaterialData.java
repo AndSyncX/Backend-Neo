@@ -11,7 +11,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(schema = "db_neo", name = "material")
+@Table(schema = "neo", name = "material")
 public class MaterialData {
 
     @Id
