@@ -20,13 +20,13 @@ public class CourseData {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name", length = 250)
+    @Column(name = "name", length = 250, nullable = false)
     private String name;
 
     @Column(name = "description", length = 500)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserData userData;
 
