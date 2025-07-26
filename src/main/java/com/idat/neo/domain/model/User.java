@@ -1,7 +1,7 @@
 package com.idat.neo.domain.model;
 
 public record User(
-        String id,
+        Long id,
         String name,
         String email,
         String password,

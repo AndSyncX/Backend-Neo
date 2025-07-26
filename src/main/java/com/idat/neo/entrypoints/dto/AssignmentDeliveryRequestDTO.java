@@ -9,7 +9,7 @@ public record AssignmentDeliveryRequestDTO(
         Long taskId,
 
         @NotNull(message = "El ID del usuario es obligatorio")
-        String userId,
+        Long userId,
 
         @NotBlank(message = "La URL del archivo es obligatoria")
         String file

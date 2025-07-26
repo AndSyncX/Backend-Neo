@@ -27,12 +27,12 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
-    public Enrollment save(Enrollment enrollment, Long courseId, String userId ) {
+    public Enrollment save(Enrollment enrollment, Long courseId, Long userId ) {
         return enrollmentRepository.save(enrollment, courseId, userId);
     }
 
     @Override
-    public Enrollment update(Long id, Enrollment enrollment, Long courseId, String userId) {
+    public Enrollment update(Long id, Enrollment enrollment, Long courseId, Long userId) {
         Enrollment existingEnrollment = findById(id);
 
         Enrollment updatedEnrollment = new Enrollment(

@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(String id) {
+    public User findById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User no encontrado con id: " + id));
     }
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(String id, User user) {
+    public User update(Long id, User user) {
         User existingUser = findById(id);
 
         User updatedUser = new User(
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 }

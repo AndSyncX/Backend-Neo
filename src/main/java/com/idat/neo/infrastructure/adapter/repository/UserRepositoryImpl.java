@@ -7,6 +7,7 @@ import com.idat.neo.infrastructure.adapter.entity.UserData;
 import com.idat.neo.infrastructure.adapter.mapper.UserMapper;
 import com.idat.neo.infrastructure.adapter.persistence.UserDataRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserDataRepository userDataRepository;
+    private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
     @Override
@@ -29,7 +31,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findById(String id) {
+    public Optional<User> findById(Long id) {
         return userDataRepository.findById(id)
                 .filter(UserData::isEnable)
                 .map(userMapper::toDomain);
@@ -37,12 +39,15 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User save(User user) {
-        UserData saved = userDataRepository.save(userMapper.toEntity(user));
+        UserData entity = userMapper.toEntity(user);
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        entity.setEnable(true);
+        UserData saved = userDataRepository.save(entity);
         return userMapper.toDomain(saved);
     }
 
     @Override
-    public User update(String id, User user) {
+    public User update(Long id, User user) {
         UserData existing = userDataRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + id));
 
@@ -56,7 +61,7 @@ public class UserRepositoryImpl implements UserRepository {
         return userMapper.toDomain(updated);
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         UserData existing = userDataRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + id));
 

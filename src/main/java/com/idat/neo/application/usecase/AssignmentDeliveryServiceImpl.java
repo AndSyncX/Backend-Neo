@@ -27,12 +27,12 @@ public class AssignmentDeliveryServiceImpl implements AssignmentDeliveryService 
     }
 
     @Override
-    public AssignmentDelivery save(AssignmentDelivery assignmentDelivery, Long taskId, String userId) {
+    public AssignmentDelivery save(AssignmentDelivery assignmentDelivery, Long taskId, Long userId) {
         return assignmentDeliveryRepository.save(assignmentDelivery, taskId, userId);
     }
 
     @Override
-    public AssignmentDelivery update(Long id, AssignmentDelivery assignmentDelivery, Long taskId, String userId) {
+    public AssignmentDelivery update(Long id, AssignmentDelivery assignmentDelivery, Long taskId, Long userId) {
         AssignmentDelivery existingAssignmentDelivery = findById(id);
 
         AssignmentDelivery updatedAssignmentDelivery = new AssignmentDelivery(

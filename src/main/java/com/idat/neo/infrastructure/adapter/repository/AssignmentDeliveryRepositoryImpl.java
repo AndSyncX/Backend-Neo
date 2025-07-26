@@ -40,7 +40,7 @@ public class AssignmentDeliveryRepositoryImpl implements AssignmentDeliveryRepos
     }
 
     @Override
-    public AssignmentDelivery save(AssignmentDelivery delivery, Long taskId, String userId) {
+    public AssignmentDelivery save(AssignmentDelivery delivery, Long taskId, Long userId) {
         TaskData taskData = taskDataRepository.findById(taskId)
                 .orElseThrow(() -> new EntityNotFoundException("Tarea no encontrada con id: " + taskId));
         UserData userData = userDataRepository.findById(userId)
@@ -55,7 +55,7 @@ public class AssignmentDeliveryRepositoryImpl implements AssignmentDeliveryRepos
     }
 
     @Override
-    public AssignmentDelivery update(Long id, AssignmentDelivery delivery, Long taskId, String userId) {
+    public AssignmentDelivery update(Long id, AssignmentDelivery delivery, Long taskId, Long userId) {
         AssignmentDeliveryData existing = deliveryDataRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Entrega no encontrada con id: " + id));
 

@@ -16,7 +16,7 @@ public record CourseRequestDTO(
         String description,
 
         @NotNull(message = "El ID del usuario es obligatorio")
-        String userId,
+        Long userId,
 
         @NotNull(message = "La fecha de inicio es obligatoria")
         LocalDate startDate,

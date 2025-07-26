@@ -37,7 +37,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
-    public Course save(Course course, String userId) {
+    public Course save(Course course, Long userId) {
         UserData userData = userDataRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + userId));
 
@@ -49,7 +49,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
-    public Course update(Long id, Course course, String userId) {
+    public Course update(Long id, Course course, Long userId) {
         CourseData existingCourseData = courseDataRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tarea no encontrada con id: " + id));
 

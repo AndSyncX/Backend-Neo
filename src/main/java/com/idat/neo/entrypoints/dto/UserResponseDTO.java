@@ -1,7 +1,7 @@
 package com.idat.neo.entrypoints.dto;
 
 public record UserResponseDTO(
-        String id,
+        Long id,
         String name,
         String email,
         String role,

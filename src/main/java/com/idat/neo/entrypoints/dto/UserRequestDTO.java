@@ -6,10 +6,6 @@ import jakarta.validation.constraints.Size;
 
 public record UserRequestDTO(
 
-        @NotBlank(message = "El id es obligatorio")
-        @Size(max = 100, message = "El id no debe exceder los 12 caracteres")
-        String id,
-
         @NotBlank(message = "El nombre es obligatorio")
         @Size(max = 100, message = "El nombre no debe exceder los 100 caracteres")
         String name,
@@ -24,6 +20,5 @@ public record UserRequestDTO(
 
         @NotBlank(message = "El rol es obligatorio")
         String role
-
 ) {
 }

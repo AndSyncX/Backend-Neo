@@ -40,7 +40,7 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
     }
 
     @Override
-    public Enrollment save(Enrollment enrollment, Long courseId, String userId) {
+    public Enrollment save(Enrollment enrollment, Long courseId, Long userId) {
         CourseData courseData = courseDataRepository.findById(courseId)
                 .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con id: " + courseId));
         UserData userData = userDataRepository.findById(userId)
@@ -55,7 +55,7 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
     }
 
     @Override
-    public Enrollment update(Long id, Enrollment enrollment, Long courseId, String userId) {
+    public Enrollment update(Long id, Enrollment enrollment, Long courseId, Long userId) {
         EnrollmentData existing = enrollmentDataRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Matrícula no encontrada con id: " + id));
 

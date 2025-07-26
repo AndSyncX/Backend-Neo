@@ -11,7 +11,7 @@ public record EnrollmentRequestDTO(
         Long courseId,
 
         @NotNull(message = "El ID del usuario es obligatorio")
-        String userId,
+        Long userId,
 
         @NotNull(message = "La fecha de inscripción es obligatoria")
         LocalDate enrollmentDate

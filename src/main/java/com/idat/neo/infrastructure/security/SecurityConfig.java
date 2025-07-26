@@ -1,5 +1,6 @@
 package com.idat.neo.infrastructure.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -16,7 +17,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration // -> Se usa para configurar la seguridad del sistema
 @EnableWebSecurity // -> Para usar reglas de seguridad personalizadas para las rutas de mi aplicación web
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final UserDetailsService userDetailsService;
 
     @Bean // -> Le dice a Spring que el resultado del método debe ser gestionado como un "servicio"
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -25,6 +29,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 // Protege todas las rutas y pide que el usuario esté autenticado.
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/v1/neo/user").permitAll()
                         .anyRequest().authenticated()
                 )
                 // Usa autenticación básica (usuario y contraseña en cada request, como Postman o navegador).
@@ -33,7 +38,7 @@ public class SecurityConfig {
     }
 
     // Crea un usuario en la memoria
-    @Bean
+   /* @Bean
     public UserDetailsService users() {
         UserDetails user = User.builder()
                 .username("user")
@@ -41,7 +46,7 @@ public class SecurityConfig {
                 .roles()
                 .build();
         return new InMemoryUserDetailsManager(user);
-    }
+    }*/
 
     // Encriptar la contraseña
     @Bean

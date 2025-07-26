@@ -27,12 +27,12 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course save(Course course, String userId) {
+    public Course save(Course course, Long userId) {
         return courseRepository.save(course, userId);
     }
 
     @Override
-    public Course update(Long id, Course course, String userId) {
+    public Course update(Long id, Course course, Long userId) {
         Course existingCourse = findById(id);
 
         Course updatedCourse = new Course(
