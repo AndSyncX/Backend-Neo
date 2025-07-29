@@ -25,7 +25,7 @@ public class UserRepositoryImpl implements UserRepository {
     public List<User> findAll() {
         return userDataRepository.findAll()
                 .stream()
-                .filter(UserData::isEnable)
+                //.filter(UserData::isEnable)
                 .map(userMapper::toDomain)
                 .toList();
     }
@@ -33,7 +33,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<User> findById(Long id) {
         return userDataRepository.findById(id)
-                .filter(UserData::isEnable)
+                //.filter(UserData::isEnable)
                 .map(userMapper::toDomain);
     }
 
