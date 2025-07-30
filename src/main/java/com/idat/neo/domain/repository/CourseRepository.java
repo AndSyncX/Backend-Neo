@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface CourseRepository {
     List<Course> findAll();
     Optional<Course> findById(Long id);
-    Course save(Course course);
+    Course save(Course course, Long userId);
+    Course update(Long id, Course course, Long userId);
 }

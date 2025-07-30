@@ -3,12 +3,11 @@ package com.idat.neo.domain.service;
 import com.idat.neo.domain.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
     List<User> findAll();
-    User findById(String id);
+    User findById(Long id);
     User save(User user);
-    User update(String id, User user);
-    void deleteById(String id);
+    User update(Long id, User user);
+    void deleteById(Long id);
 }

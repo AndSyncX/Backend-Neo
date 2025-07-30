@@ -3,12 +3,11 @@ package com.idat.neo.application.usecase;
 import com.idat.neo.domain.model.Enrollment;
 import com.idat.neo.domain.repository.EnrollmentRepository;
 import com.idat.neo.domain.service.EnrollmentService;
-import jakarta.persistence.EntityNotFoundException;
+import com.idat.neo.entrypoints.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,12 +27,21 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
-    public Enrollment save(Enrollment enrollment) {
-        return enrollmentRepository.save(enrollment);
+    public Enrollment save(Enrollment enrollment, Long courseId, Long userId ) {
+        return enrollmentRepository.save(enrollment, courseId, userId);
     }
 
     @Override
-    public Enrollment update(Long id, Enrollment enrollment) {
-        return null;
+    public Enrollment update(Long id, Enrollment enrollment, Long courseId, Long userId) {
+        Enrollment existingEnrollment = findById(id);
+
+        Enrollment updatedEnrollment = new Enrollment(
+                existingEnrollment.id(),
+                enrollment.course(),
+                enrollment.user(),
+                enrollment.enrollmentDate()
+        );
+
+        return enrollmentRepository.update(id, updatedEnrollment, courseId, userId);
     }
 }

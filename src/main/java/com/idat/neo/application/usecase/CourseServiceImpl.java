@@ -3,7 +3,7 @@ package com.idat.neo.application.usecase;
 import com.idat.neo.domain.model.Course;
 import com.idat.neo.domain.repository.CourseRepository;
 import com.idat.neo.domain.service.CourseService;
-import jakarta.persistence.EntityNotFoundException;
+import com.idat.neo.entrypoints.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,17 +27,16 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course save(Course course) {
-        return courseRepository.save(course);
+    public Course save(Course course, Long userId) {
+        return courseRepository.save(course, userId);
     }
 
     @Override
-    public Course update(Long id, Course course) {
-        Course existing = courseRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con id: " + id));
+    public Course update(Long id, Course course, Long userId) {
+        Course existingCourse = findById(id);
 
         Course updatedCourse = new Course(
-                id,
+                existingCourse.id(),
                 course.name(),
                 course.description(),
                 course.user(),
@@ -45,7 +44,6 @@ public class CourseServiceImpl implements CourseService {
                 course.endDate()
         );
 
-        return courseRepository.save(updatedCourse);
+        return courseRepository.update(id, updatedCourse, userId);
     }
-
 }

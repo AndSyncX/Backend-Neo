@@ -3,12 +3,11 @@ package com.idat.neo.application.usecase;
 import com.idat.neo.domain.model.Material;
 import com.idat.neo.domain.repository.MaterialRepository;
 import com.idat.neo.domain.service.MaterialService;
-import jakarta.persistence.EntityNotFoundException;
+import com.idat.neo.entrypoints.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,12 +27,22 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public Material save(Material material) {
-        return materialRepository.save(material);
+    public Material save(Material material, Long courseId) {
+        return materialRepository.save(material, courseId);
     }
 
     @Override
-    public Material update(Long id, Material material) {
-        return null;
+    public Material update(Long id, Material material, Long courseId) {
+        Material existingMaterial = findById(id);
+
+        Material updatedMaterial = new Material(
+                existingMaterial.id(),
+                material.course(),
+                material.title(),
+                material.description(),
+                material.firebaseFileUrl()
+        );
+
+        return materialRepository.update(id, updatedMaterial, courseId);
     }
 }
