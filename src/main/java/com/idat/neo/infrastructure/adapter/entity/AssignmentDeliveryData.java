@@ -11,7 +11,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(schema = "db_neo", name = "assignment_delivery")
+@Table(schema = "neo", name = "assignment_delivery")
 public class AssignmentDeliveryData {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(schema = "db_neo", name = "task")
+@Table(schema = "neo", name = "task")
 public class TaskData {
 
     @Id
