@@ -23,25 +23,31 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     @Override
     public Enrollment findById(Long id) {
         return enrollmentRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Inscripción no encontrado con id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Matricula no encontrada con id "+ id));
     }
 
     @Override
-    public Enrollment save(Enrollment enrollment, Long courseId, Long userId ) {
-        return enrollmentRepository.save(enrollment, courseId, userId);
+    public Enrollment save(Enrollment enrollment, Long userId, Long scheduledCourseId) {
+        return enrollmentRepository.save(enrollment, userId, scheduledCourseId);
     }
 
     @Override
-    public Enrollment update(Long id, Enrollment enrollment, Long courseId, Long userId) {
-        Enrollment existingEnrollment = findById(id);
+    public Enrollment update(Long id, Enrollment enrollment, Long userId, Long scheduledCourseId) {
+        Enrollment existing = findById(id);
 
-        Enrollment updatedEnrollment = new Enrollment(
-                existingEnrollment.id(),
-                enrollment.course(),
+        Enrollment updateEnrollment = new Enrollment(
+                existing.id(),
                 enrollment.user(),
-                enrollment.enrollmentDate()
+                enrollment.scheduledCourse(),
+                enrollment.enrollmentDate(),
+                enrollment.status()
         );
 
-        return enrollmentRepository.update(id, updatedEnrollment, courseId, userId);
+        return enrollmentRepository.update(id, updateEnrollment, userId, scheduledCourseId);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        enrollmentRepository.deleteById(id);
     }
 }

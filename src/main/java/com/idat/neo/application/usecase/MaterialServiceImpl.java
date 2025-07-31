@@ -27,22 +27,30 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public Material save(Material material, Long courseId) {
-        return materialRepository.save(material, courseId);
+    public Material save(Material material, Long scheduledCourseId) {
+        return materialRepository.save(material, scheduledCourseId);
     }
 
     @Override
-    public Material update(Long id, Material material, Long courseId) {
-        Material existingMaterial = findById(id);
+    public Material update(Long id, Material material, Long scheduledCourseId) {
+        Material existing = findById(id);
 
-        Material updatedMaterial = new Material(
-                existingMaterial.id(),
-                material.course(),
+        Material updateMaterial = new Material(
+                existing.id(),
+                material.scheduledCourse(),
                 material.title(),
                 material.description(),
-                material.firebaseFileUrl()
+                material.uploadDate(),
+                material.fileUrl(),
+                material.fileType(),
+                material.isRequired()
         );
 
-        return materialRepository.update(id, updatedMaterial, courseId);
+        return materialRepository.update(id, updateMaterial, scheduledCourseId);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        materialRepository.deleteById(id);
     }
 }

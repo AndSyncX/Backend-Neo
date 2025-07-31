@@ -4,8 +4,9 @@ import java.time.LocalDate;
 
 public record Enrollment(
         Long id,
-        Course course,
         User user,
-        LocalDate enrollmentDate
+        ScheduledCourse scheduledCourse,
+        LocalDate enrollmentDate,
+        String status
 ) {
 }

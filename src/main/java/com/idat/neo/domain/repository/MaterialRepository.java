@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface MaterialRepository {
     List<Material> findAll();
     Optional<Material> findById(Long id);
-    Material save(Material material, Long courseId);
-    Material update(Long id, Material material, Long courseId);
+    Material save(Material material, Long scheduledCourseId);
+    Material update(Long id, Material material, Long scheduledCourseId);
+    void deleteById(Long id);
 }

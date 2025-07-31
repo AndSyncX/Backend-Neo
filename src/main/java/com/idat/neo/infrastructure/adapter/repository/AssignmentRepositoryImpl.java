@@ -1,7 +1,7 @@
 package com.idat.neo.infrastructure.adapter.repository;
 
-import com.idat.neo.domain.model.Task;
-import com.idat.neo.domain.repository.TaskRepository;
+import com.idat.neo.domain.model.Assignment;
+import com.idat.neo.domain.repository.AssignmentRepository;
 import com.idat.neo.infrastructure.adapter.entity.CourseData;
 import com.idat.neo.infrastructure.adapter.entity.TaskData;
 import com.idat.neo.infrastructure.adapter.mapper.TaskMapper;
@@ -16,14 +16,14 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class TaskRepositoryImpl implements TaskRepository {
+public class AssignmentRepositoryImpl implements AssignmentRepository {
 
     private final TaskDataRepository taskDataRepository;
     private final CourseDataRepository courseDataRepository;
     private final TaskMapper taskMapper;
 
     @Override
-    public List<Task> findAll() {
+    public List<Assignment> findAll() {
         return taskDataRepository.findAll()
                 .stream()
                 .map(taskMapper::toDomain)
@@ -31,17 +31,17 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public Optional<Task> findById(Long id) {
+    public Optional<Assignment> findById(Long id) {
         return taskDataRepository.findById(id)
                 .map(taskMapper::toDomain);
     }
 
     @Override
-    public Task save(Task task, Long courseId) {
+    public Assignment save(Assignment assignment, Long courseId) {
         CourseData courseData = courseDataRepository.findById(courseId)
                 .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con id: " + courseId));
 
-        TaskData taskData = taskMapper.toEntity(task);
+        TaskData taskData = taskMapper.toEntity(assignment);
         taskData.setCourseData(courseData);
 
         TaskData saved = taskDataRepository.save(taskData);
@@ -49,16 +49,16 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public Task update(Long id, Task task, Long courseId) {
+    public Assignment update(Long id, Assignment assignment, Long courseId) {
         TaskData existingTaskData = taskDataRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tarea no encontrada con id: " + id));
 
         CourseData courseData = courseDataRepository.findById(courseId)
                 .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con id: " + courseId));
 
-        existingTaskData.setTitle(task.title());
-        existingTaskData.setDescription(task.description());
-        existingTaskData.setDeliveryDate(task.deliveryDate());
+        existingTaskData.setTitle(assignment.title());
+        existingTaskData.setDescription(assignment.description());
+        existingTaskData.setDeliveryDate(assignment.deliveryDate());
         existingTaskData.setCourseData(courseData);
 
         TaskData updatedTaskData = taskDataRepository.save(existingTaskData);

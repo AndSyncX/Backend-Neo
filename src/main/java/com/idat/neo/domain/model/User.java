@@ -1,11 +1,18 @@
 package com.idat.neo.domain.model;
 
+import java.time.LocalDate;
+
 public record User(
         Long id,
-        String name,
+        String firstName,
+        String lastName,
         String email,
+        Integer dni,
+        String phone,
+        LocalDate birthDate,
+        String address,
         String password,
         String role,
-        boolean enable
+        boolean active
 ) {
 }

@@ -2,9 +2,9 @@ package com.idat.neo.domain.model;
 
 import java.time.LocalDate;
 
-public record Task(
+public record Assignment(
         Long id,
-        Course course,
+        ScheduledCourse scheduledCourse,
         String title,
         String description,
         LocalDate deliveryDate

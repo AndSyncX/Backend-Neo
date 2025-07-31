@@ -27,22 +27,28 @@ public class AssignmentDeliveryServiceImpl implements AssignmentDeliveryService 
     }
 
     @Override
-    public AssignmentDelivery save(AssignmentDelivery assignmentDelivery, Long taskId, Long userId) {
-        return assignmentDeliveryRepository.save(assignmentDelivery, taskId, userId);
+    public AssignmentDelivery save(AssignmentDelivery assignmentDelivery, Long assignmentId, Long userId) {
+        return assignmentDeliveryRepository.save(assignmentDelivery, assignmentId, userId);
     }
 
+
     @Override
-    public AssignmentDelivery update(Long id, AssignmentDelivery assignmentDelivery, Long taskId, Long userId) {
-        AssignmentDelivery existingAssignmentDelivery = findById(id);
+    public AssignmentDelivery update(Long id, AssignmentDelivery assignmentDelivery, Long assignmentId, Long userId) {
+        AssignmentDelivery existing = findById(id);
 
         AssignmentDelivery updatedAssignmentDelivery = new AssignmentDelivery(
-                existingAssignmentDelivery.id(),
-                assignmentDelivery.task(),
+                existing.id(),
+                assignmentDelivery.assignment(),
                 assignmentDelivery.user(),
                 assignmentDelivery.file(),
                 assignmentDelivery.qualification()
         );
 
-        return assignmentDeliveryRepository.update(id, updatedAssignmentDelivery, taskId, userId);
+        return assignmentDeliveryRepository.update(id, updatedAssignmentDelivery, assignmentId, userId);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        assignmentDeliveryRepository.deleteById(id);
     }
 }

@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface EnrollmentRepository {
     List<Enrollment> findAll();
     Optional<Enrollment> findById(Long id);
-    Enrollment save(Enrollment enrollment, Long courseId, Long userId);
-    Enrollment update(Long id, Enrollment enrollment, Long courseId, Long userId);
+    Enrollment save(Enrollment enrollment, Long userId, Long scheduledCourseId);
+    Enrollment update(Long id, Enrollment enrollment, Long userId, Long scheduledCourseId);
+    void deleteById(Long id);
 }

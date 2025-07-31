@@ -1,9 +1,9 @@
 package com.idat.neo.domain.model;
 
-public record Course(
+public record Career(
         Long id,
         String name,
-        String code,
-        Integer credits
+        String faculty,
+        String durationYears
 ) {
 }
