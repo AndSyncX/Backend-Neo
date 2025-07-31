@@ -1,5 +1,6 @@
 package com.idat.neo.infrastructure.adapter.entity;
 
+import com.idat.neo.domain.model.ScheduledCourse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,16 +14,16 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(schema = "neo", name = "task")
+@Table(schema = "neo", name = "assignment")
 public class AssignmentData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_id")
-    private CourseData courseData;
+    @JoinColumn(name = "scheduledCourse_id", nullable = false)
+    private ScheduledCourse scheduledCourse;
 
     @Column(name = "title", length = 250)
     private String title;

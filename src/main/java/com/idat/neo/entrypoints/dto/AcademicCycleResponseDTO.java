@@ -7,6 +7,7 @@ public record AcademicCycleResponseDTO(
         String name,
         LocalDate startDate,
         LocalDate endDate,
-        String active
+        boolean active,
+        String status // -> Activo / Inactivo
 ) {
 }

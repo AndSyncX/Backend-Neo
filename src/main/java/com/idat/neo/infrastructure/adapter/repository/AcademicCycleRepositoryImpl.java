@@ -34,6 +34,20 @@ public class AcademicCycleRepositoryImpl implements AcademicCycleRepository {
     }
 
     @Override
+    public Optional<AcademicCycle> findByName(String name) {
+        return academicCycleDataRepository.findByName(name)
+                .map(academicCycleMapper::toDomain);
+    }
+
+    @Override
+    public List<AcademicCycle> findActive() {
+        return academicCycleDataRepository.findByActiveTrue()
+                .stream()
+                .map(academicCycleMapper::toDomain)
+                .toList();
+    }
+
+    @Override
     public AcademicCycle save(AcademicCycle academicCycle) {
         AcademicCycleData entity = academicCycleMapper.toEntity(academicCycle);
         entity.setActive(true);

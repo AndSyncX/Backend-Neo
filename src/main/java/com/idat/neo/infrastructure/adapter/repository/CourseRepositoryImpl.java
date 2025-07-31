@@ -2,10 +2,8 @@ package com.idat.neo.infrastructure.adapter.repository;
 
 import com.idat.neo.domain.model.Course;
 import com.idat.neo.domain.repository.CourseRepository;
-import com.idat.neo.infrastructure.adapter.entity.UserData;
 import com.idat.neo.infrastructure.adapter.entity.CourseData;
 import com.idat.neo.infrastructure.adapter.mapper.CourseMapper;
-import com.idat.neo.infrastructure.adapter.persistence.UserDataRepository;
 import com.idat.neo.infrastructure.adapter.persistence.CourseDataRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +17,6 @@ import java.util.Optional;
 public class CourseRepositoryImpl implements CourseRepository {
 
     private final CourseDataRepository courseDataRepository;
-    private final UserDataRepository userDataRepository;
     private final CourseMapper courseMapper;
 
     @Override
@@ -38,46 +35,32 @@ public class CourseRepositoryImpl implements CourseRepository {
 
     @Override
     public Course save(Course course) {
-        return null;
-    }
-
-    @Override
-    public Course update(Long id, Course course) {
-        return null;
-    }
-
-    @Override
-    public void deleteById(Long id) {
-
-    }
-
-    /*@Override
-    public Course save(Course course, Long userId) {
-        UserData userData = userDataRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + userId));
-
         CourseData courseData = courseMapper.toEntity(course);
-        courseData.setUserData(userData);
-
+        courseData.setActive(true);
         CourseData saved = courseDataRepository.save(courseData);
         return courseMapper.toDomain(saved);
     }
 
     @Override
-    public Course update(Long id, Course course, Long userId) {
-        CourseData existingCourseData = courseDataRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Tarea no encontrada con id: " + id));
+    public Course update(Long id, Course course) {
+        CourseData existing = courseDataRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Curso no encontrada con id: " + id));
 
-        UserData userData = userDataRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + userId));
+        existing.setName(course.name());
+        existing.setCode(course.code());
+        existing.setCredits(course.credits());
+        existing.setActive(course.active());
 
-        existingCourseData.setName(course.name());
-        existingCourseData.setDescription(course.description());
-        existingCourseData.setUserData(userData);
-        existingCourseData.setStartDate(course.startDate());
-        existingCourseData.setEndDate(course.endDate());
+        CourseData update = courseDataRepository.save(existing);
+        return courseMapper.toDomain(update);
+    }
 
-        CourseData updatedCourseData = courseDataRepository.save(existingCourseData);
-        return courseMapper.toDomain(updatedCourseData);
-    }*/
+    @Override
+    public void deleteById(Long id) {
+        CourseData existing = courseDataRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Curso no encontrada con id: " + id));
+
+        existing.setActive(false);
+        courseDataRepository.save(existing);
+    }
 }

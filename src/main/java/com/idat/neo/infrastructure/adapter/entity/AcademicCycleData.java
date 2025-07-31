@@ -24,10 +24,10 @@ public class AcademicCycleData {
     @Column(name = "name", nullable = false, unique = true, length = 30)
     private String name;
 
-    @Column(name = "startDate", nullable = false)
+    @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
-    @Column(name = "endDate", nullable = false)
+    @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
     @Column(name = "active", nullable = false)

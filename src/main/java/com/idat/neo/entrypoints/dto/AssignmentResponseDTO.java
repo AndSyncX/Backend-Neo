@@ -2,7 +2,7 @@ package com.idat.neo.entrypoints.dto;
 
 import java.time.LocalDate;
 
-public record TaskResponseDTO(
+public record AssignmentResponseDTO(
         Long id,
         String courseName,
         String title,

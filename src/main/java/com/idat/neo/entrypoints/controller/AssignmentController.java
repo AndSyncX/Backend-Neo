@@ -2,8 +2,8 @@ package com.idat.neo.entrypoints.controller;
 
 import com.idat.neo.domain.model.Assignment;
 import com.idat.neo.domain.service.AssignmentService;
-import com.idat.neo.entrypoints.dto.TaskRequestDTO;
-import com.idat.neo.entrypoints.dto.TaskResponseDTO;
+import com.idat.neo.entrypoints.dto.AssignmentRequestDTO;
+import com.idat.neo.entrypoints.dto.AssignmentResponseDTO;
 import com.idat.neo.infrastructure.adapter.mapper.AssignmentDtoMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +22,8 @@ public class AssignmentController {
     private final AssignmentDtoMapper assignmentDtoMapper;
 
     @GetMapping
-    public ResponseEntity<List<TaskResponseDTO>> getAllTasks(){
-        List<TaskResponseDTO> response = assignmentService.findAll()
+    public ResponseEntity<List<AssignmentResponseDTO>> getAllTasks(){
+        List<AssignmentResponseDTO> response = assignmentService.findAll()
                 .stream()
                 .map(assignmentDtoMapper::toDto)
                 .toList();
@@ -31,21 +31,21 @@ public class AssignmentController {
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<TaskResponseDTO> getTaskById(@PathVariable("id") Long id){
+    ResponseEntity<AssignmentResponseDTO> getTaskById(@PathVariable("id") Long id){
         Assignment assignment = assignmentService.findById(id);
         return ResponseEntity.ok(assignmentDtoMapper.toDto(assignment));
     }
 
     @PostMapping
-    public ResponseEntity<TaskResponseDTO> createTask(@RequestBody @Valid TaskRequestDTO requestDTO) {
+    public ResponseEntity<AssignmentResponseDTO> createTask(@RequestBody @Valid AssignmentRequestDTO requestDTO) {
         Assignment assignmentToSave = assignmentDtoMapper.toDomain(requestDTO);
         Assignment savedAssignment = assignmentService.save(assignmentToSave, requestDTO.courseId());
         return ResponseEntity.status(HttpStatus.CREATED).body(assignmentDtoMapper.toDto(savedAssignment));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TaskResponseDTO> updateTask(@PathVariable Long id,
-                                                      @RequestBody @Valid TaskRequestDTO requestDTO) {
+    public ResponseEntity<AssignmentResponseDTO> updateTask(@PathVariable Long id,
+                                                            @RequestBody @Valid AssignmentRequestDTO requestDTO) {
         Assignment assignmentToUpdate = assignmentDtoMapper.toDomain(requestDTO);
         Assignment updatedAssignment = assignmentService.update(id, assignmentToUpdate, requestDTO.courseId());
         return ResponseEntity.ok(assignmentDtoMapper.toDto(updatedAssignment));

@@ -4,6 +4,7 @@ public record Course(
         Long id,
         String name,
         String code,
-        Integer credits
+        Integer credits,
+        boolean active
 ) {
 }

@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @Entity
@@ -18,21 +16,18 @@ public class CourseData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "name", length = 250, nullable = false)
+    @Column(name = "name", unique = true, nullable = false, length = 100)
     private String name;
 
-    @Column(name = "description", length = 500)
-    private String description;
+    @Column(name = "code", unique = true, nullable = false, length = 12)
+    private String code;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private UserData userData;
+    @Column(name = "credits", nullable = false)
+    private Integer credits;
 
-    @Column(name = "start_date")
-    private LocalDate startDate;
-
-    @Column(name = "end_date")
-    private LocalDate endDate;
+    @Column(name = "active", nullable = false)
+    private boolean active;
 }

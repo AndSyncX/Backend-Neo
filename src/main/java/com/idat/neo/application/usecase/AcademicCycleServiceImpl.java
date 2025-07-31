@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,17 @@ public class AcademicCycleServiceImpl implements AcademicCycleService {
     public AcademicCycle findById(Long id) {
         return academicCycleRepository.findById(id)
                 .orElseThrow(()-> new EntityNotFoundException("Ciclo Académico no encontrado con id "+ id));
+    }
+
+    @Override
+    public AcademicCycle findByName(String name) {
+        return academicCycleRepository.findByName(name)
+                .orElseThrow(() -> new EntityNotFoundException("Ciclo académico no encontrado con nombre " + name));
+    }
+
+    @Override
+    public List<AcademicCycle> findActive() {
+        return academicCycleRepository.findActive();
     }
 
     @Override

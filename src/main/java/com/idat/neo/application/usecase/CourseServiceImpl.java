@@ -39,7 +39,8 @@ public class CourseServiceImpl implements CourseService {
                 existing.id(),
                 course.name(),
                 course.code(),
-                course.credits()
+                course.credits(),
+                course.active()
         );
 
         return courseRepository.update(id, updateCourse);

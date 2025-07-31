@@ -56,4 +56,20 @@ public class AcademicCycleController {
         academicCycleService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<AcademicCycleResponseDTO> getByName(@RequestParam String name) {
+        AcademicCycle academicCycle = academicCycleService.findByName(name);
+        AcademicCycleResponseDTO dto = academicCycleDtoMapper.toDto(academicCycle);
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/active")
+    public ResponseEntity<List<AcademicCycleResponseDTO>> getActiveAcademicCycle() {
+        List<AcademicCycleResponseDTO> response = academicCycleService.findActive()
+                .stream()
+                .map(academicCycleDtoMapper::toDto)
+                .toList();
+        return ResponseEntity.ok(response);
+    }
 }

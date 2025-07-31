@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
-public record TaskRequestDTO(
+public record AssignmentRequestDTO(
 
         @NotNull(message = "El ID del curso es obligatorio")
         Long courseId,
