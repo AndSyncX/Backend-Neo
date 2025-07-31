@@ -3,10 +3,10 @@ package com.idat.neo.infrastructure.adapter.repository;
 import com.idat.neo.domain.model.Assignment;
 import com.idat.neo.domain.repository.AssignmentRepository;
 import com.idat.neo.infrastructure.adapter.entity.CourseData;
-import com.idat.neo.infrastructure.adapter.entity.TaskData;
-import com.idat.neo.infrastructure.adapter.mapper.TaskMapper;
+import com.idat.neo.infrastructure.adapter.entity.AssignmentData;
+import com.idat.neo.infrastructure.adapter.mapper.AssignmentMapper;
 import com.idat.neo.infrastructure.adapter.persistence.CourseDataRepository;
-import com.idat.neo.infrastructure.adapter.persistence.TaskDataRepository;
+import com.idat.neo.infrastructure.adapter.persistence.AssignmentDataRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -18,22 +18,22 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AssignmentRepositoryImpl implements AssignmentRepository {
 
-    private final TaskDataRepository taskDataRepository;
+    private final AssignmentDataRepository assignmentDataRepository;
     private final CourseDataRepository courseDataRepository;
-    private final TaskMapper taskMapper;
+    private final AssignmentMapper assignmentMapper;
 
     @Override
     public List<Assignment> findAll() {
-        return taskDataRepository.findAll()
+        return assignmentDataRepository.findAll()
                 .stream()
-                .map(taskMapper::toDomain)
+                .map(assignmentMapper::toDomain)
                 .toList();
     }
 
     @Override
     public Optional<Assignment> findById(Long id) {
-        return taskDataRepository.findById(id)
-                .map(taskMapper::toDomain);
+        return assignmentDataRepository.findById(id)
+                .map(assignmentMapper::toDomain);
     }
 
     @Override
@@ -41,27 +41,32 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
         CourseData courseData = courseDataRepository.findById(courseId)
                 .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con id: " + courseId));
 
-        TaskData taskData = taskMapper.toEntity(assignment);
-        taskData.setCourseData(courseData);
+        AssignmentData assignmentData = assignmentMapper.toEntity(assignment);
+        assignmentData.setCourseData(courseData);
 
-        TaskData saved = taskDataRepository.save(taskData);
-        return taskMapper.toDomain(saved);
+        AssignmentData saved = assignmentDataRepository.save(assignmentData);
+        return assignmentMapper.toDomain(saved);
     }
 
     @Override
     public Assignment update(Long id, Assignment assignment, Long courseId) {
-        TaskData existingTaskData = taskDataRepository.findById(id)
+        AssignmentData existingAssignmentData = assignmentDataRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tarea no encontrada con id: " + id));
 
         CourseData courseData = courseDataRepository.findById(courseId)
                 .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con id: " + courseId));
 
-        existingTaskData.setTitle(assignment.title());
-        existingTaskData.setDescription(assignment.description());
-        existingTaskData.setDeliveryDate(assignment.deliveryDate());
-        existingTaskData.setCourseData(courseData);
+        existingAssignmentData.setTitle(assignment.title());
+        existingAssignmentData.setDescription(assignment.description());
+        existingAssignmentData.setDeliveryDate(assignment.deliveryDate());
+        existingAssignmentData.setCourseData(courseData);
 
-        TaskData updatedTaskData = taskDataRepository.save(existingTaskData);
-        return taskMapper.toDomain(updatedTaskData);
+        AssignmentData updatedAssignmentData = assignmentDataRepository.save(existingAssignmentData);
+        return assignmentMapper.toDomain(updatedAssignmentData);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
     }
 }

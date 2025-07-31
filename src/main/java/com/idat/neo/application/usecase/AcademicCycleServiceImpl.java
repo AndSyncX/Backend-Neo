@@ -39,7 +39,8 @@ public class AcademicCycleServiceImpl implements AcademicCycleService {
                 existing.id(),
                 academicCycle.name(),
                 academicCycle.startDate(),
-                academicCycle.endDate()
+                academicCycle.endDate(),
+                academicCycle.active()
         );
 
         return academicCycleRepository.update(id, updateAcademicCycle);

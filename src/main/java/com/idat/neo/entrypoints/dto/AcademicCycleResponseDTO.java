@@ -1,12 +1,12 @@
-package com.idat.neo.domain.model;
+package com.idat.neo.entrypoints.dto;
 
 import java.time.LocalDate;
 
-public record AcademicCycle(
+public record AcademicCycleResponseDTO(
         Long id,
         String name,
         LocalDate startDate,
         LocalDate endDate,
-        boolean active
+        String active
 ) {
 }

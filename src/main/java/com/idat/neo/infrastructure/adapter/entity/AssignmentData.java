@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(schema = "neo", name = "task")
-public class TaskData {
+public class AssignmentData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

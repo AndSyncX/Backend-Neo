@@ -51,11 +51,11 @@ public class UserRepositoryImpl implements UserRepository {
         UserData existing = userDataRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + id));
 
-        existing.setName(user.name());
+        existing.setName(user.firstName());
         existing.setEmail(user.email());
         existing.setPassword(user.password());
         existing.setRole(user.role());
-        existing.setEnable(user.enable());
+        existing.setEnable(user.active());
 
         UserData updated = userDataRepository.save(existing);
         return userMapper.toDomain(updated);

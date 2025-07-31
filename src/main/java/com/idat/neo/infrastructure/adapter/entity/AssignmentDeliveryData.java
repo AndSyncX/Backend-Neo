@@ -19,7 +19,7 @@ public class AssignmentDeliveryData {
 
     @ManyToOne
     @JoinColumn(name = "task_id")
-    private TaskData taskData;
+    private AssignmentData assignmentData;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
