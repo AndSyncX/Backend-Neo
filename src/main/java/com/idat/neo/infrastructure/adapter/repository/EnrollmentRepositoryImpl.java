@@ -71,4 +71,9 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
         EnrollmentData updated = enrollmentDataRepository.save(existing);
         return enrollmentMapper.toDomain(updated);
     }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
 }

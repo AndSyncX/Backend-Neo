@@ -59,9 +59,14 @@ public class MaterialRepositoryImpl implements MaterialRepository {
         existingMaterialData.setCourseData(courseData);
         existingMaterialData.setTitle(material.title());
         existingMaterialData.setDescription(material.description());
-        existingMaterialData.setFirebaseFileUrl(material.firebaseFileUrl());
+        existingMaterialData.setFirebaseFileUrl(material.fileUrl());
 
         MaterialData updatedMaterialData = materialDataRepository.save(existingMaterialData);
         return materialMapper.toDomain(updatedMaterialData);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
     }
 }

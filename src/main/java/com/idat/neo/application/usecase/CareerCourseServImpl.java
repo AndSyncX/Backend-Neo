@@ -17,7 +17,7 @@ public class CareerCourseServImpl implements CareerCourseService {
 
     @Override
     public List<CareerCourse> findAll() {
-        return List.of();
+        return careerCourseRepository.findAll();
     }
 
     @Override

@@ -1,10 +1,10 @@
-package com.idat.neo.domain.model;
+package com.idat.neo.entrypoints.dto;
 
-public record Career(
+public record CareerResponseDTO(
         Long id,
         String name,
         String faculty,
         String durationYears,
-        boolean active
+        String active
 ) {
 }

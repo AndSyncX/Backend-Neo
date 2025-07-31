@@ -37,11 +37,16 @@ public class UserServiceImpl implements UserService {
 
         User updatedUser = new User(
                 existingUser.id(),
-                user.name(),
+                user.firstName(),
+                user.lastName(),
                 user.email(),
+                user.dni(),
+                user.phone(),
+                user.birthDate(),
+                user.address(),
                 user.password(),
                 user.role(),
-                user.enable()
+                user.active()
         );
 
         return userRepository.update(id, updatedUser);

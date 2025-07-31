@@ -2,6 +2,7 @@ package com.idat.neo.infrastructure.adapter.repository;
 
 import com.idat.neo.domain.model.AcademicCycle;
 import com.idat.neo.domain.repository.AcademicCycleRepository;
+import com.idat.neo.entrypoints.exception.EntityNotFoundException;
 import com.idat.neo.infrastructure.adapter.entity.AcademicCycleData;
 import com.idat.neo.infrastructure.adapter.mapper.AcademicCycleMapper;
 import com.idat.neo.infrastructure.adapter.persistence.AcademicCycleDataRepository;
@@ -42,11 +43,24 @@ public class AcademicCycleRepositoryImpl implements AcademicCycleRepository {
 
     @Override
     public AcademicCycle update(Long id, AcademicCycle academicCycle) {
-        return null;
+        AcademicCycleData existing = academicCycleDataRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Ciclo académico no encontrado " + id));
+
+        existing.setName(academicCycle.name());
+        existing.setStartDate(academicCycle.startDate());
+        existing.setEndDate(academicCycle.endDate());
+        existing.setActive(academicCycle.active());
+
+        AcademicCycleData update = academicCycleDataRepository.save(existing);
+        return academicCycleMapper.toDomain(update);
     }
 
     @Override
     public void deleteById(Long id) {
+        AcademicCycleData existing = academicCycleDataRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Ciclo académico no encontrado " + id));
 
+        existing.setActive(false);
+        academicCycleDataRepository.save(existing);
     }
 }

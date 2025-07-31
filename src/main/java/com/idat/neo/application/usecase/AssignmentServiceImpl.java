@@ -15,7 +15,6 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     private final AssignmentRepository assignmentRepository;
 
-
     @Override
     public List<Assignment> findAll() {
         return assignmentRepository.findAll();

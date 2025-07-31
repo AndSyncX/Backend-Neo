@@ -37,6 +37,21 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
+    public Course save(Course course) {
+        return null;
+    }
+
+    @Override
+    public Course update(Long id, Course course) {
+        return null;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
+
+    /*@Override
     public Course save(Course course, Long userId) {
         UserData userData = userDataRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + userId));
@@ -64,5 +79,5 @@ public class CourseRepositoryImpl implements CourseRepository {
 
         CourseData updatedCourseData = courseDataRepository.save(existingCourseData);
         return courseMapper.toDomain(updatedCourseData);
-    }
+    }*/
 }
