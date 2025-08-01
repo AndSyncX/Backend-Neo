@@ -22,4 +22,6 @@ public interface UserRepository {
     User update(Long id, User user);
 
     void deleteById(Long id);
+
+    void updatePassword(Long id, String oldPassword, String newPassword);
 }

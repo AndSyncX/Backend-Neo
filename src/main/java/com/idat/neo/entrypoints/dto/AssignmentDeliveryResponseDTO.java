@@ -2,7 +2,7 @@ package com.idat.neo.entrypoints.dto;
 
 public record AssignmentDeliveryResponseDTO(
         Long id,
-        String AssignmentTitle,
+        String assignmentTitle,
         String userFirstName,
         String userLastName,
         String file,

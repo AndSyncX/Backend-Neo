@@ -19,7 +19,6 @@ public record UserRequestDTO(
         String email,
 
         @NotBlank(message = "El DNI es obligatorio")
-        @Min(value = 8, message = "El DNI no puede tener menos de 8 números")
         @Size(max = 12, message = "El DNI no debe exceder los 12 caracteres")
         String dni,
 
@@ -33,10 +32,6 @@ public record UserRequestDTO(
         @NotBlank(message = "La dirección es obligatoria")
         @Size(max = 300, message = "La dirección no debe exceder los 300 caracteres")
         String address,
-
-        @NotBlank(message = "La contraseña es obligatoria")
-        @Size(max = 100, message = "La contraseña no debe exceder los 100 caracteres")
-        String password,
 
         @NotBlank(message = "El rol es obligatorio")
         @Size(max = 10, message = "El rol no debe exceder los 10 caracteres")

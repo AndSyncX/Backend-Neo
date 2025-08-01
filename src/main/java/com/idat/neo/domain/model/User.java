@@ -7,7 +7,7 @@ public record User(
         String firstName,
         String lastName,
         String email,
-        Integer dni,
+        String dni,
         String phone,
         LocalDate birthDate,
         String address,

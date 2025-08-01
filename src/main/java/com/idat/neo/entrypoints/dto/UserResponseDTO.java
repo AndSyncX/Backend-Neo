@@ -7,11 +7,10 @@ public record UserResponseDTO(
         String firstName,
         String lastName,
         String email,
-        Integer dni,
+        String dni,
         String phone,
         LocalDate birthDate,
         String address,
-        String password,
         String role,
         String status, // → Activo / Inactivo
         boolean active

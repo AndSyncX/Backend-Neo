@@ -11,7 +11,9 @@ public interface AssignmentDeliveryDtoMapper {
 
     AssignmentDelivery toDomain(AssignmentDeliveryRequestDTO dto);
 
-    /*@Mapping(source = "task.title", target = "taskTitle")
-    @Mapping(source = "user.name", target = "userFullName")*/
-    AssignmentDeliveryResponseDTO toDto(AssignmentDelivery delivery);
+    @Mapping(source = "assignment.title", target = "assignmentTitle")
+    @Mapping(source = "user.firstName", target = "userFirstName")
+    @Mapping(source = "user.lastName", target = "userLastName")
+    @Mapping(expression = "java(assignmentDelivery.active() ? \"Activo\" : \"Inactivo\")", target = "status")
+    AssignmentDeliveryResponseDTO toDto(AssignmentDelivery assignmentDelivery);
 }

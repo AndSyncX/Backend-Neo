@@ -1,6 +1,7 @@
 package com.idat.neo.domain.service;
 
 import com.idat.neo.domain.model.User;
+import com.idat.neo.entrypoints.dto.PasswordUpdateDTO;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface UserService {
     User update(Long id, User user);
 
     void deleteById(Long id);
+
+    void updatePassword(Long id, PasswordUpdateDTO dto);
 }

@@ -3,6 +3,7 @@ package com.idat.neo.application.usecase;
 import com.idat.neo.domain.model.User;
 import com.idat.neo.domain.repository.UserRepository;
 import com.idat.neo.domain.service.UserService;
+import com.idat.neo.entrypoints.dto.PasswordUpdateDTO;
 import com.idat.neo.entrypoints.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -60,7 +61,7 @@ public class UserServiceImpl implements UserService {
                 user.phone(),
                 user.birthDate(),
                 user.address(),
-                user.password(),
+                existingUser.password(),
                 user.role(),
                 user.active()
         );
@@ -71,5 +72,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public void updatePassword(Long id, PasswordUpdateDTO dto) {
+        User user = findById(id);
+        userRepository.updatePassword(id, dto.oldPassword(), dto.newPassword());
     }
 }

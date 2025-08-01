@@ -25,7 +25,22 @@ public class UserRepositoryImpl implements UserRepository {
     public List<User> findAll() {
         return userDataRepository.findAll()
                 .stream()
-                //.filter(UserData::isEnable)
+                .map(userMapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public List<User> findAllTeachers() {
+        return userDataRepository.findAllTeachers()
+                .stream()
+                .map(userMapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public List<User> findAllStudents() {
+        return userDataRepository.findAllStudents()
+                .stream()
                 .map(userMapper::toDomain)
                 .toList();
     }
@@ -33,7 +48,12 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<User> findById(Long id) {
         return userDataRepository.findById(id)
-                //.filter(UserData::isEnable)
+                .map(userMapper::toDomain);
+    }
+
+    @Override
+    public Optional<User> findByName(String name) {
+        return userDataRepository.findByName(name)
                 .map(userMapper::toDomain);
     }
 
@@ -41,7 +61,7 @@ public class UserRepositoryImpl implements UserRepository {
     public User save(User user) {
         UserData entity = userMapper.toEntity(user);
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
-        entity.setEnable(true);
+        entity.setActive(true);
         UserData saved = userDataRepository.save(entity);
         return userMapper.toDomain(saved);
     }
@@ -51,11 +71,14 @@ public class UserRepositoryImpl implements UserRepository {
         UserData existing = userDataRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + id));
 
-        existing.setName(user.firstName());
+        existing.setFirstName(user.firstName());
+        existing.setLastName(user.lastName());
         existing.setEmail(user.email());
-        existing.setPassword(user.password());
+        existing.setDni(user.dni());
+        existing.setPhone(user.phone());
+        existing.setBirthDate(user.birthDate());
+        existing.setAddress(user.address());
         existing.setRole(user.role());
-        existing.setEnable(user.active());
 
         UserData updated = userDataRepository.save(existing);
         return userMapper.toDomain(updated);
@@ -65,7 +88,20 @@ public class UserRepositoryImpl implements UserRepository {
         UserData existing = userDataRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + id));
 
-        existing.setEnable(false);
+        existing.setActive(false);
+        userDataRepository.save(existing);
+    }
+
+    @Override
+    public void updatePassword(Long id, String oldPassword, String newPassword) {
+        UserData existing = userDataRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + id));
+
+        if (!passwordEncoder.matches(oldPassword, existing.getPassword())) {
+            throw new IllegalArgumentException("La contraseña actual no es válida");
+        }
+
+        existing.setPassword(passwordEncoder.encode(newPassword));
         userDataRepository.save(existing);
     }
 }

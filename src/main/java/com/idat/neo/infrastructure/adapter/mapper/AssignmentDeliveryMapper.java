@@ -8,11 +8,11 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface AssignmentDeliveryMapper {
 
-    /*@Mapping(source = "assignmentData", target = "task")
-    @Mapping(source = "userData", target = "user")*/
+    @Mapping(source = "assignmentData", target = "assignment")
+    @Mapping(source = "userData", target = "user")
     AssignmentDelivery toDomain(AssignmentDeliveryData entity);
 
-    /*@Mapping(source = "assignment", target = "taskData")
-    @Mapping(source = "user", target = "userData")*/
+    @Mapping(source = "assignment", target = "assignmentData")
+    @Mapping(source = "user", target = "userData")
     AssignmentDeliveryData toEntity(AssignmentDelivery domain);
 }
