@@ -8,11 +8,11 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface EnrollmentMapper {
 
-    /*@Mapping(source = "courseData", target = "course")
-    @Mapping(source = "userData", target = "user")*/
+    @Mapping(source = "scheduledCourseData", target = "scheduledCourse")
+    @Mapping(source = "userData", target = "user")
     Enrollment toDomain(EnrollmentData entity);
 
-  /*  @Mapping(source = "course", target = "courseData")
-    @Mapping(source = "user", target = "userData")*/
+    @Mapping(source = "scheduledCourse", target = "scheduledCourseData")
+    @Mapping(source = "user", target = "userData")
     EnrollmentData toEntity(Enrollment domain);
 }

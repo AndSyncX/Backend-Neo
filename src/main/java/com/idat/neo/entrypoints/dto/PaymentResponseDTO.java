@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public record PaymentResponseDTO(
         Long id,
-        String enrollmentCode,
+        Long enrollmentId,
         String type,
         Integer installmentNumber,
         BigDecimal amount,
