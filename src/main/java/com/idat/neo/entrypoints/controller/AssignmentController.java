@@ -39,7 +39,7 @@ public class AssignmentController {
     @PostMapping
     public ResponseEntity<AssignmentResponseDTO> createTask(@RequestBody @Valid AssignmentRequestDTO requestDTO) {
         Assignment assignmentToSave = assignmentDtoMapper.toDomain(requestDTO);
-        Assignment savedAssignment = assignmentService.save(assignmentToSave, requestDTO.courseId());
+        Assignment savedAssignment = assignmentService.save(assignmentToSave, requestDTO.scheduledCourseId());
         return ResponseEntity.status(HttpStatus.CREATED).body(assignmentDtoMapper.toDto(savedAssignment));
     }
 
@@ -47,7 +47,7 @@ public class AssignmentController {
     public ResponseEntity<AssignmentResponseDTO> updateTask(@PathVariable Long id,
                                                             @RequestBody @Valid AssignmentRequestDTO requestDTO) {
         Assignment assignmentToUpdate = assignmentDtoMapper.toDomain(requestDTO);
-        Assignment updatedAssignment = assignmentService.update(id, assignmentToUpdate, requestDTO.courseId());
+        Assignment updatedAssignment = assignmentService.update(id, assignmentToUpdate, requestDTO.scheduledCourseId());
         return ResponseEntity.ok(assignmentDtoMapper.toDto(updatedAssignment));
     }
 }

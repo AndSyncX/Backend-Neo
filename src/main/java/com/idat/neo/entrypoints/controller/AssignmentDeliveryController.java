@@ -38,7 +38,7 @@ public class AssignmentDeliveryController {
     @PostMapping
     public ResponseEntity<AssignmentDeliveryResponseDTO> createDelivery(@RequestBody @Valid AssignmentDeliveryRequestDTO requestDTO) {
         AssignmentDelivery toSave = assignmentDeliveryDtoMapper.toDomain(requestDTO);
-        AssignmentDelivery saved = assignmentDeliveryService.save(toSave, requestDTO.taskId(), requestDTO.userId());
+        AssignmentDelivery saved = assignmentDeliveryService.save(toSave, requestDTO.assignmentId(), requestDTO.userId());
         return ResponseEntity.ok(assignmentDeliveryDtoMapper.toDto(saved));
     }
 
@@ -46,7 +46,7 @@ public class AssignmentDeliveryController {
     public ResponseEntity<AssignmentDeliveryResponseDTO> updateDelivery(@PathVariable Long id,
                                                                         @RequestBody @Valid AssignmentDeliveryRequestDTO requestDTO) {
         AssignmentDelivery toUpdate = assignmentDeliveryDtoMapper.toDomain(requestDTO);
-        AssignmentDelivery updated = assignmentDeliveryService.update(id, toUpdate, requestDTO.taskId(), requestDTO.userId());
+        AssignmentDelivery updated = assignmentDeliveryService.update(id, toUpdate, requestDTO.assignmentId(), requestDTO.userId());
         return ResponseEntity.ok(assignmentDeliveryDtoMapper.toDto(updated));
     }
 }

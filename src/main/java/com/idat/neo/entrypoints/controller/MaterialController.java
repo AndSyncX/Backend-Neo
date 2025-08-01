@@ -39,7 +39,7 @@ public class MaterialController {
     @PostMapping
     public ResponseEntity<MaterialResponseDTO> createMaterial(@RequestBody @Valid MaterialRequestDTO requestDTO) {
         Material materialToSave = materialDtoMapper.toDomain(requestDTO);
-        Material savedMaterial = materialService.save(materialToSave, requestDTO.courseId());
+        Material savedMaterial = materialService.save(materialToSave, requestDTO.scheduledCourseId());
         return ResponseEntity.status(HttpStatus.CREATED).body(materialDtoMapper.toDto(savedMaterial));
     }
 
@@ -47,7 +47,7 @@ public class MaterialController {
     public ResponseEntity<MaterialResponseDTO> updateMaterial(@PathVariable Long id,
                                                           @RequestBody @Valid MaterialRequestDTO requestDTO) {
         Material materialToUpdate = materialDtoMapper.toDomain(requestDTO);
-        Material updatedMaterial = materialService.update(id, materialToUpdate, requestDTO.courseId());
+        Material updatedMaterial = materialService.update(id, materialToUpdate, requestDTO.scheduledCourseId());
         return ResponseEntity.ok(materialDtoMapper.toDto(updatedMaterial));
     }
 }

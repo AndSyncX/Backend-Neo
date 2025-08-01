@@ -38,7 +38,7 @@ public class EnrollmentController {
     @PostMapping
     public ResponseEntity<EnrollmentResponseDTO> createEnrollment(@RequestBody @Valid EnrollmentRequestDTO requestDTO) {
         Enrollment toSave = enrollmentDtoMapper.toDomain(requestDTO);
-        Enrollment saved = enrollmentService.save(toSave, requestDTO.courseId(), requestDTO.userId());
+        Enrollment saved = enrollmentService.save(toSave, requestDTO.scheduledCourseId(), requestDTO.userId());
         return ResponseEntity.ok(enrollmentDtoMapper.toDto(saved));
     }
 
@@ -46,7 +46,7 @@ public class EnrollmentController {
     public ResponseEntity<EnrollmentResponseDTO> updateEnrollment(@PathVariable Long id,
                                                                   @RequestBody @Valid EnrollmentRequestDTO requestDTO) {
         Enrollment toUpdate = enrollmentDtoMapper.toDomain(requestDTO);
-        Enrollment updated = enrollmentService.update(id, toUpdate, requestDTO.courseId(), requestDTO.userId());
+        Enrollment updated = enrollmentService.update(id, toUpdate, requestDTO.scheduledCourseId(), requestDTO.userId());
         return ResponseEntity.ok(enrollmentDtoMapper.toDto(updated));
     }
 }

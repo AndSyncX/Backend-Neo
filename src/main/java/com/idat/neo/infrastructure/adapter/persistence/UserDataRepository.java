@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDataRepository extends JpaRepository<UserData, Long> {
+
     Optional<UserData> findByEmail(String email);
+
     Optional<UserData> findByName(String name);
 
     @Query("SELECT u FROM UserData u WHERE u.role = 'TEACHER'")

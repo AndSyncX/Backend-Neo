@@ -36,6 +36,22 @@ public class AcademicCycleController {
         return ResponseEntity.ok(academicCycleDtoMapper.toDto(academicCycle));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<AcademicCycleResponseDTO> getByName(@RequestParam String name) {
+        AcademicCycle academicCycle = academicCycleService.findByName(name);
+        AcademicCycleResponseDTO dto = academicCycleDtoMapper.toDto(academicCycle);
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/active")
+    public ResponseEntity<List<AcademicCycleResponseDTO>> getActiveAcademicCycle() {
+        List<AcademicCycleResponseDTO> response = academicCycleService.findActive()
+                .stream()
+                .map(academicCycleDtoMapper::toDto)
+                .toList();
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
     public ResponseEntity<AcademicCycleResponseDTO> createAcademicCycle(@RequestBody @Valid AcademicCycleRequestDTO requestDTO) {
         AcademicCycle academicCycleToSave = academicCycleDtoMapper.toDomain(requestDTO);
@@ -55,21 +71,5 @@ public class AcademicCycleController {
     public ResponseEntity<Void> deleteAcademicCycle(@PathVariable Long id) {
         academicCycleService.deleteById(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/search")
-    public ResponseEntity<AcademicCycleResponseDTO> getByName(@RequestParam String name) {
-        AcademicCycle academicCycle = academicCycleService.findByName(name);
-        AcademicCycleResponseDTO dto = academicCycleDtoMapper.toDto(academicCycle);
-        return ResponseEntity.ok(dto);
-    }
-
-    @GetMapping("/active")
-    public ResponseEntity<List<AcademicCycleResponseDTO>> getActiveAcademicCycle() {
-        List<AcademicCycleResponseDTO> response = academicCycleService.findActive()
-                .stream()
-                .map(academicCycleDtoMapper::toDto)
-                .toList();
-        return ResponseEntity.ok(response);
     }
 }
