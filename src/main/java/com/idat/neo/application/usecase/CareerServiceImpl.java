@@ -27,6 +27,17 @@ public class CareerServiceImpl implements CareerService {
     }
 
     @Override
+    public List<Career> findActive() {
+        return careerRepository.findActive();
+    }
+
+    @Override
+    public Career findByName(String name) {
+        return careerRepository.findByName(name)
+                .orElseThrow(() -> new EntityNotFoundException("Carrera no encontrada con nombre " + name));
+    }
+
+    @Override
     public Career save(Career career) {
         return careerRepository.save(career);
     }
@@ -39,7 +50,8 @@ public class CareerServiceImpl implements CareerService {
                 existing.id(),
                 career.name(),
                 career.faculty(),
-                career.durationYears()
+                career.durationYears(),
+                career.active()
         );
 
         return careerRepository.update(id, updateCareer);

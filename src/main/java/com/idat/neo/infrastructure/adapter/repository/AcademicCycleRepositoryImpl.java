@@ -35,7 +35,7 @@ public class AcademicCycleRepositoryImpl implements AcademicCycleRepository {
 
     @Override
     public Optional<AcademicCycle> findByName(String name) {
-        return academicCycleDataRepository.findByName(name)
+        return academicCycleDataRepository.findByNameIgnoreCase(name)
                 .map(academicCycleMapper::toDomain);
     }
 

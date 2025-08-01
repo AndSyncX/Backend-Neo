@@ -6,9 +6,18 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CareerRepository {
+
     List<Career> findAll();
+
     Optional<Career> findById(Long id);
+
+    List<Career> findActive();
+
+    Optional<Career> findByName(String name);
+
     Career save(Career career);
+
     Career update(Long id, Career career);
+
     void deleteById(Long id);
 }

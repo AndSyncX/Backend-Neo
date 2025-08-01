@@ -1,7 +1,9 @@
 package com.idat.neo.entrypoints.controller;
 
 import com.idat.neo.domain.model.Career;
+import com.idat.neo.domain.model.Career;
 import com.idat.neo.domain.service.CareerService;
+import com.idat.neo.entrypoints.dto.CareerResponseDTO;
 import com.idat.neo.entrypoints.dto.CareerRequestDTO;
 import com.idat.neo.entrypoints.dto.CareerResponseDTO;
 import com.idat.neo.infrastructure.adapter.mapper.CareerDtoMapper;
@@ -15,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/neo/academic-cycles")
+@RequestMapping("api/v1/neo/career")
 public class CareerController {
 
     private final CareerService careerService;
@@ -55,5 +57,21 @@ public class CareerController {
     public ResponseEntity<Void> deleteCareer(@PathVariable Long id) {
         careerService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<CareerResponseDTO> getByName(@RequestParam String name) {
+        Career career = careerService.findByName(name);
+        CareerResponseDTO dto = careerDtoMapper.toDto(career);
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/active")
+    public ResponseEntity<List<CareerResponseDTO>> getActiveCareer() {
+        List<CareerResponseDTO> response = careerService.findActive()
+                .stream()
+                .map(careerDtoMapper::toDto)
+                .toList();
+        return ResponseEntity.ok(response);
     }
 }

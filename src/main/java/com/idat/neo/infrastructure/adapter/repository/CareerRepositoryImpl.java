@@ -34,6 +34,20 @@ public class CareerRepositoryImpl implements CareerRepository {
     }
 
     @Override
+    public List<Career> findActive() {
+        return careerDataRepository.findByActiveTrue()
+                .stream()
+                .map(careerMapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public Optional<Career> findByName(String name) {
+        return careerDataRepository.findByNameIgnoreCase(name)
+                .map(careerMapper::toDomain);
+    }
+
+    @Override
     public Career save(Career career) {
         CareerData entity = careerMapper.toEntity(career);
         entity.setActive(true);
