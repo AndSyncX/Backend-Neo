@@ -5,8 +5,11 @@ import java.time.LocalDate;
 public record AssignmentResponseDTO(
         Long id,
         String courseName,
+        String teacherName,
         String title,
         String description,
-        LocalDate deliveryDate
+        LocalDate deliveryDate,
+        boolean active,
+        String status // → Activo / Inactivo
 ) {
 }

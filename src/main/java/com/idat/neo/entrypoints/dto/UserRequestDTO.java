@@ -1,24 +1,46 @@
 package com.idat.neo.entrypoints.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import java.time.LocalDate;
 
 public record UserRequestDTO(
 
         @NotBlank(message = "El nombre es obligatorio")
-        @Size(max = 100, message = "El nombre no debe exceder los 100 caracteres")
-        String name,
+        @Size(max = 70, message = "El nombre no debe exceder los 70 caracteres")
+        String firstName,
 
-        @NotBlank(message = "El correo es obligatorio")
-        @Email(message = "El correo debe tener un formato válido")
+        @NotBlank(message = "El apellido es obligatorio")
+        @Size(max = 70, message = "El apellido no debe exceder los 70 caracteres")
+        String lastName,
+
+        @NotBlank(message = "El correo electrónico es obligatorio")
+        @Email(message = "El correo electrónico no es válido")
+        @Size(max = 200, message = "El correo no debe exceder los 200 caracteres")
         String email,
 
+        @NotBlank(message = "El DNI es obligatorio")
+        @Min(value = 8, message = "El DNI no puede tener menos de 8 números")
+        @Size(max = 12, message = "El DNI no debe exceder los 12 caracteres")
+        String dni,
+
+        @NotBlank(message = "El teléfono es obligatorio")
+        @Size(max = 12, message = "El teléfono no debe exceder los 12 caracteres")
+        String phone,
+
+        @NotNull(message = "La fecha de nacimiento es obligatoria")
+        LocalDate birthDate,
+
+        @NotBlank(message = "La dirección es obligatoria")
+        @Size(max = 300, message = "La dirección no debe exceder los 300 caracteres")
+        String address,
+
         @NotBlank(message = "La contraseña es obligatoria")
-        @Size(min = 6, max = 100, message = "La contraseña debe tener entre 6 y 100 caracteres")
+        @Size(max = 100, message = "La contraseña no debe exceder los 100 caracteres")
         String password,
 
         @NotBlank(message = "El rol es obligatorio")
+        @Size(max = 10, message = "El rol no debe exceder los 10 caracteres")
         String role
+
 ) {
 }

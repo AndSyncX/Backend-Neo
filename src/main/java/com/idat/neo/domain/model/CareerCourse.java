@@ -4,7 +4,7 @@ public record CareerCourse(
         Long id,
         Career career,
         Course course,
-        boolean isMandatory, // -> Es obligatorio
+        boolean isMandatory, // → Es obligatorio
         boolean active
 ) {
 }

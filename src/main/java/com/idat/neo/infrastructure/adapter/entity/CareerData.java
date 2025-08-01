@@ -25,7 +25,7 @@ public class CareerData {
     @Column(name = "faculty", nullable = false, length = 50)
     private String faculty;
 
-    @Column(name = "durationYears", nullable = false, length = 20)
+    @Column(name = "durationYears", nullable = false, length = 10)
     private String durationYears;
 
     @Column(name = "active", nullable = false)

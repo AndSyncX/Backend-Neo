@@ -29,4 +29,7 @@ public class CareerCourseData {
 
     @Column(name = "is_mandatory", nullable = false)
     private boolean isMandatory;
+
+    @Column(name = "active", nullable = false)
+    private boolean active;
 }

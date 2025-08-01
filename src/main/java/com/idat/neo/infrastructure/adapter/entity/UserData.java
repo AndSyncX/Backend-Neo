@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @Entity
@@ -18,18 +20,33 @@ public class UserData {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name", length = 250)
-    private String name;
+    @Column(name = "first_name", nullable = false, length = 70)
+    private String firstName;
 
-    @Column(name = "email", length = 200)
+    @Column(name = "last_name", nullable = false, length = 70)
+    private String lastName;
+
+    @Column(name = "email", nullable = false, unique = true, length = 200)
     private String email;
 
-    @Column(name = "password", length = 100)
+    @Column(name = "dni", nullable = false, unique = true, length = 12)
+    private String dni;
+
+    @Column(name = "phone", nullable = false, unique = true, length = 12)
+    private String phone;
+
+    @Column(name = "birth_date", nullable = false)
+    private LocalDate birthDate;
+
+    @Column(name = "address", nullable = false, length = 300)
+    private String address;
+
+    @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @Column(name = "role", length = 10)
+    @Column(name = "role", nullable = false, length = 10)
     private String role;
 
-    @Column(name = "enable")
-    private boolean enable;
+    @Column(name = "active")
+    private boolean active;
 }

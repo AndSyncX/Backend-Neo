@@ -22,15 +22,18 @@ public class AssignmentData {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "scheduledCourse_id", nullable = false)
+    @JoinColumn(name = "scheduled_course_id", nullable = false)
     private ScheduledCourseData scheduledCourseData;
 
-    @Column(name = "title", length = 250)
+    @Column(name = "title", nullable = false, length = 200)
     private String title;
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "delivery_date")
+    @Column(name = "delivery_date", nullable = false)
     private LocalDate deliveryDate;
+
+    @Column(name = "active", nullable = false)
+    private boolean active;
 }

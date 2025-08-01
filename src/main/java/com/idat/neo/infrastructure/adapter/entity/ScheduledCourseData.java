@@ -24,7 +24,7 @@ public class ScheduledCourseData {
     private CourseData courseData;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "teacher_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private UserData userData;
 
     @ManyToOne(optional = false)
@@ -45,4 +45,7 @@ public class ScheduledCourseData {
 
     @Column(name = "max_capacity", nullable = false)
     private Integer maxCapacity;
+
+    @Column(name = "active")
+    private boolean active;
 }

@@ -13,21 +13,25 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(schema = "neo", name = "assignment_delivery")
 public class AssignmentDeliveryData {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "task_id")
+    @JoinColumn(name = "assignment_id", nullable = false)
     private AssignmentData assignmentData;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserData userData;
 
-    @Column(name = "file")
+    @Column(name = "file", nullable = false, length = 80)
     private String file;
 
     @Column(name = "qualification")
     private Long qualification;
+
+    @Column(name = "active", nullable = false)
+    private boolean active;
 }

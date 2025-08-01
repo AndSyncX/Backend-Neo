@@ -9,19 +9,14 @@ import java.time.LocalDate;
 public record CourseRequestDTO(
 
         @NotBlank(message = "El nombre del curso es obligatorio")
-        @Size(max = 250, message = "El nombre no debe exceder los 250 caracteres")
+        @Size(max = 100, message = "El nombre no debe exceder los 100 caracteres")
         String name,
 
-        @Size(max = 500, message = "La descripción no debe exceder los 500 caracteres")
-        String description,
+        @NotBlank(message = "El código del curso es obligatorio")
+        @Size(max = 12, message = "El código no debe exceder los 12 caracteres")
+        String code,
 
-        @NotNull(message = "El ID del usuario es obligatorio")
-        Long userId,
-
-        @NotNull(message = "La fecha de inicio es obligatoria")
-        LocalDate startDate,
-
-        @NotNull(message = "La fecha de fin es obligatoria")
-        LocalDate endDate
+        @NotNull(message = "El número de créditos es obligatorio")
+        Integer credits
 ) {
 }

@@ -22,7 +22,7 @@ public class PaymentData {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "enrollment_id", nullable = false)
     private EnrollmentData enrollment;
 
@@ -47,6 +47,6 @@ public class PaymentData {
     @Column(name = "payment_method", length = 30)
     private String paymentMethod;
 
-    @Column(name = "notes", length = 500)
+    @Column(name = "notes", length = 255)
     private String notes;
 }

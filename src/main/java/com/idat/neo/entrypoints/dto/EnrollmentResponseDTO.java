@@ -4,8 +4,11 @@ import java.time.LocalDate;
 
 public record EnrollmentResponseDTO(
         Long id,
+        String userFirstName,
+        String userLastName,
         String courseName,
-        String userFullName,
-        LocalDate enrollmentDate
+        LocalDate enrollmentDate,
+        String status,
+        boolean active
 ) {
 }
