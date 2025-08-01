@@ -13,6 +13,6 @@ public record Payment(
         LocalDate paymentDate,
         String status,
         String paymentMethod,
-        String notes
+        String notes // → Comentarios
 ) {
 }

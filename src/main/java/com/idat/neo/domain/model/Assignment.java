@@ -7,6 +7,7 @@ public record Assignment(
         ScheduledCourse scheduledCourse,
         String title,
         String description,
-        LocalDate deliveryDate
+        LocalDate deliveryDate,
+        boolean active
 ) {
 }

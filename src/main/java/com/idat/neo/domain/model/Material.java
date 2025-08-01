@@ -10,6 +10,7 @@ public record Material(
         LocalDate uploadDate,
         String fileUrl,
         String fileType,
-        boolean isRequired
+        boolean isRequired,
+        boolean active
 ) {
 }

@@ -9,6 +9,7 @@ public record ScheduledCourse(
         String classroom,
         String schedule,
         String group,
-        Integer maxCapacity
+        Integer maxCapacity,
+        boolean active
 ) {
 }

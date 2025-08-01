@@ -6,9 +6,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PaymentRepository {
+
     List<Payment> findAll();
+
     Optional<Payment> findById(Long id);
+
+    Optional<Payment> findByStatus(String name);
+
     Payment save(Payment payment, Long enrollmentId);
+
     Payment update(Long id, Payment payment, Long enrollmentId);
+
     void deleteById(Long id);
 }

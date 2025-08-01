@@ -5,6 +5,7 @@ public record AssignmentDelivery(
         Assignment assignment,
         User user,
         String file,
-        Long qualification
+        Long qualification,
+        boolean active
 ) {
 }

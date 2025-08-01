@@ -7,6 +7,7 @@ public record Enrollment(
         User user,
         ScheduledCourse scheduledCourse,
         LocalDate enrollmentDate,
-        String status
+        String status,
+        boolean active
 ) {
 }
