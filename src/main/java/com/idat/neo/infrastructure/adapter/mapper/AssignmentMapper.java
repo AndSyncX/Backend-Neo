@@ -8,9 +8,9 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface AssignmentMapper {
 
-    @Mapping(source = "courseData", target = "course")
+    /*@Mapping(source = "courseData", target = "course")*/
     Assignment toDomain(AssignmentData entity);
 
-    @Mapping(source = "course", target = "courseData")
+   /* @Mapping(source = "course", target = "courseData")*/
     AssignmentData toEntity(Assignment domain);
 }

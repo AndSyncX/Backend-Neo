@@ -11,6 +11,6 @@ public interface AssignmentDtoMapper {
 
     Assignment toDomain(AssignmentRequestDTO dto);
 
-    @Mapping(source = "course.name", target = "courseName")
+    /*@Mapping(source = "course.name", target = "courseName")*/
     AssignmentResponseDTO toDto(Assignment assignment);
 }

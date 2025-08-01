@@ -8,9 +8,9 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface MaterialMapper {
 
-    @Mapping(source = "courseData", target = "course")
+   /* @Mapping(source = "courseData", target = "course")*/
     Material toDomain(MaterialData entity);
 
-    @Mapping(source = "course", target = "courseData")
+  /*  @Mapping(source = "course", target = "courseData")*/
     MaterialData toEntity(Material domain);
 }

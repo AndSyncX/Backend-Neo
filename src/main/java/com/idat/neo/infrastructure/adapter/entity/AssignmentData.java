@@ -1,6 +1,5 @@
 package com.idat.neo.infrastructure.adapter.entity;
 
-import com.idat.neo.domain.model.ScheduledCourse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,8 +21,9 @@ public class AssignmentData {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @ManyToOne
     @JoinColumn(name = "scheduledCourse_id", nullable = false)
-    private ScheduledCourse scheduledCourse;
+    private ScheduledCourseData scheduledCourseData;
 
     @Column(name = "title", length = 250)
     private String title;

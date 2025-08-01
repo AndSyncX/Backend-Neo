@@ -11,7 +11,7 @@ public interface EnrollmentDtoMapper {
 
     Enrollment toDomain(EnrollmentRequestDTO dto);
 
-    @Mapping(source = "course.name", target = "courseName")
-    @Mapping(source = "user.name", target = "userFullName")
+   /* @Mapping(source = "course.name", target = "courseName")
+    @Mapping(source = "user.name", target = "userFullName")*/
     EnrollmentResponseDTO toDto(Enrollment enrollment);
 }

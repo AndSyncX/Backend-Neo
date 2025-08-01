@@ -11,7 +11,7 @@ public interface AssignmentDeliveryDtoMapper {
 
     AssignmentDelivery toDomain(AssignmentDeliveryRequestDTO dto);
 
-    @Mapping(source = "task.title", target = "taskTitle")
-    @Mapping(source = "user.name", target = "userFullName")
+    /*@Mapping(source = "task.title", target = "taskTitle")
+    @Mapping(source = "user.name", target = "userFullName")*/
     AssignmentDeliveryResponseDTO toDto(AssignmentDelivery delivery);
 }

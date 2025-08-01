@@ -32,10 +32,10 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults()) // <--- ¡Habilita CORS en Spring Security!
                 // Protege todas las rutas y pide que el usuario esté autenticado.
                 .authorizeHttpRequests(auth -> auth
-                        //.requestMatchers("/api/v1/neo/user").permitAll()
-                        .requestMatchers("/api/v1/neo/user/**", "/api/v1/neo/enrollment/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/neo/**").hasAnyRole("ADMIN", "TEACHER")
-                        .requestMatchers("/api/v1/neo/course/**", "/api/v1/neo/task/**", "/api/v1/neo/enrollment/**").hasRole("STUDENT")
+                        .requestMatchers("/api/v1/neo/user").permitAll()
+                        //.requestMatchers("/api/v1/neo/user/**", "/api/v1/neo/enrollment/**").hasRole("ADMIN")
+                        //.requestMatchers("/api/v1/neo/**").hasAnyRole("ADMIN", "TEACHER")
+                        //.requestMatchers("/api/v1/neo/course/**", "/api/v1/neo/task/**", "/api/v1/neo/enrollment/**").hasRole("STUDENT")
                 )
                 // Usa autenticación básica (usuario y contraseña en cada request, como Postman o navegador).
                 .httpBasic(Customizer.withDefaults());
