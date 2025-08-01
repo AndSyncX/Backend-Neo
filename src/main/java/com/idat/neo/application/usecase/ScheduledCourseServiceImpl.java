@@ -44,7 +44,8 @@ public class ScheduledCourseServiceImpl implements ScheduledCourseService {
                 scheduledCourse.classroom(),
                 scheduledCourse.schedule(),
                 scheduledCourse.group(),
-                scheduledCourse.maxCapacity()
+                scheduledCourse.maxCapacity(),
+                scheduledCourse.active()
         );
 
         return scheduledCourseRepository.update(id, updateScheduledCourse, courseId, userId, academicCycleId);

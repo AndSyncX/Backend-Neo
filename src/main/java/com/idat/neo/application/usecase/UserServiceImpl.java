@@ -21,9 +21,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findAllTeachers() {
+        return userRepository.findAllTeachers();
+    }
+
+    @Override
+    public List<User> findAllStudents() {
+        return userRepository.findAllStudents();
+    }
+
+    @Override
     public User findById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User no encontrado con id: " + id));
+    }
+
+    @Override
+    public User findByName(String name) {
+        return userRepository.findByName(name)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con nombre " + name));
     }
 
     @Override

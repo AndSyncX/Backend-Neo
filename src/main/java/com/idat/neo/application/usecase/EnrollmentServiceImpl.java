@@ -27,6 +27,12 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
+    public Enrollment findByStatus(String status) {
+        return enrollmentRepository.findByStatus(status)
+                .orElseThrow(() -> new EntityNotFoundException("Matrícula no encontrada con estado "+ status));
+    }
+
+    @Override
     public Enrollment save(Enrollment enrollment, Long userId, Long scheduledCourseId) {
         return enrollmentRepository.save(enrollment, userId, scheduledCourseId);
     }
@@ -40,7 +46,8 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                 enrollment.user(),
                 enrollment.scheduledCourse(),
                 enrollment.enrollmentDate(),
-                enrollment.status()
+                enrollment.status(),
+                enrollment.active()
         );
 
         return enrollmentRepository.update(id, updateEnrollment, userId, scheduledCourseId);

@@ -40,7 +40,8 @@ public class AssignmentServiceImpl implements AssignmentService {
                 assignment.scheduledCourse(),
                 assignment.title(),
                 assignment.description(),
-                assignment.deliveryDate()
+                assignment.deliveryDate(),
+                assignment.active()
         );
 
         return assignmentRepository.update(id, updateAssignment, scheduledCourseId);

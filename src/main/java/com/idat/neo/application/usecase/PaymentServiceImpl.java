@@ -27,6 +27,12 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    public Payment findByStatus(String status) {
+        return paymentRepository.findByStatus(status)
+                .orElseThrow(() -> new EntityNotFoundException("Pago no encontrado con estado " + status));
+    }
+
+    @Override
     public Payment save(Payment payment, Long enrollmentId) {
         return paymentRepository.save(payment, enrollmentId);
     }

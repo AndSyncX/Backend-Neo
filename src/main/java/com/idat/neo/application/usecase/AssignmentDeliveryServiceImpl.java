@@ -40,7 +40,8 @@ public class AssignmentDeliveryServiceImpl implements AssignmentDeliveryService 
                 assignmentDelivery.assignment(),
                 assignmentDelivery.user(),
                 assignmentDelivery.file(),
-                assignmentDelivery.qualification()
+                assignmentDelivery.qualification(),
+                assignmentDelivery.active()
         );
 
         return assignmentDeliveryRepository.update(id, updatedAssignmentDelivery, assignmentId, userId);

@@ -11,7 +11,7 @@ public interface PaymentRepository {
 
     Optional<Payment> findById(Long id);
 
-    Optional<Payment> findByStatus(String name);
+    Optional<Payment> findByStatus(String status);
 
     Payment save(Payment payment, Long enrollmentId);
 

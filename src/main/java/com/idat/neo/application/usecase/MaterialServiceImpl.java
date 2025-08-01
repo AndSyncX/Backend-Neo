@@ -43,7 +43,8 @@ public class MaterialServiceImpl implements MaterialService {
                 material.uploadDate(),
                 material.fileUrl(),
                 material.fileType(),
-                material.isRequired()
+                material.isRequired(),
+                material.active()
         );
 
         return materialRepository.update(id, updateMaterial, scheduledCourseId);

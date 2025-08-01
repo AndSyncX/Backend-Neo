@@ -39,7 +39,8 @@ public class CareerCourseServImpl implements CareerCourseService {
                 existing.id(),
                 careerCourse.career(),
                 careerCourse.course(),
-                careerCourse.isMandatory()
+                careerCourse.isMandatory(),
+                careerCourse.active()
         );
 
         return careerCourseRepository.update(id, updateCareerCourse, courseId, careerId);

@@ -10,7 +10,7 @@ public interface PaymentService {
 
     Payment findById(Long id);
 
-    Payment findByStatus(String name);
+    Payment findByStatus(String status);
 
     Payment save(Payment payment, Long enrollmentId);
 
