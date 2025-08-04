@@ -40,6 +40,12 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
     }
 
     @Override
+    public Optional<Enrollment> findByStatus(String status) {
+        return enrollmentDataRepository.findByStatus(status)
+                .map(enrollmentMapper::toDomain);
+    }
+
+    @Override
     public Enrollment save(Enrollment enrollment, Long courseId, Long userId) {
         CourseData courseData = courseDataRepository.findById(courseId)
                 .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con id: " + courseId));
@@ -47,7 +53,7 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + userId));
 
         EnrollmentData data = enrollmentMapper.toEntity(enrollment);
-        data.setCourseData(courseData);
+       // data.setCourseData(courseData);
         data.setUserData(userData);
 
         EnrollmentData saved = enrollmentDataRepository.save(data);
@@ -64,7 +70,7 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
         UserData userData = userDataRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + userId));
 
-        existing.setCourseData(courseData);
+        //existing.setCourseData(courseData);
         existing.setUserData(userData);
         existing.setEnrollmentDate(enrollment.enrollmentDate());
 

@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/neo/task")
+@RequestMapping("api/v1/neo/assignment")
 public class AssignmentController {
 
     private final AssignmentService assignmentService;

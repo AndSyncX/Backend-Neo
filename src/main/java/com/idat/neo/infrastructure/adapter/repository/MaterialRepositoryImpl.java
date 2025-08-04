@@ -42,7 +42,7 @@ public class MaterialRepositoryImpl implements MaterialRepository {
                 .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con id: " + courseId));
 
         MaterialData materialData = materialMapper.toEntity(material);
-        materialData.setCourseData(courseData);
+        //materialData.setCourseData(courseData);
 
         MaterialData saved = materialDataRepository.save(materialData);
         return materialMapper.toDomain(saved);
@@ -56,10 +56,10 @@ public class MaterialRepositoryImpl implements MaterialRepository {
         CourseData courseData = courseDataRepository.findById(courseId)
                 .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con id: " + courseId));
 
-        existingMaterialData.setCourseData(courseData);
+        //existingMaterialData.setCourseData(courseData);
         existingMaterialData.setTitle(material.title());
         existingMaterialData.setDescription(material.description());
-        existingMaterialData.setFirebaseFileUrl(material.fileUrl());
+        //existingMaterialData.setFirebaseFileUrl(material.fileUrl());
 
         MaterialData updatedMaterialData = materialDataRepository.save(existingMaterialData);
         return materialMapper.toDomain(updatedMaterialData);

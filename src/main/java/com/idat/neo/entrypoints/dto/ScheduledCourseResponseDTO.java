@@ -11,6 +11,7 @@ public record ScheduledCourseResponseDTO(
         String schedule,
         String group,
         Integer maxCapacity,
+        String status,
         boolean active
 ) {
 }

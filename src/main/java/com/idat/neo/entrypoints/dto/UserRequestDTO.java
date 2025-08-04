@@ -29,6 +29,9 @@ public record UserRequestDTO(
         @NotNull(message = "La fecha de nacimiento es obligatoria")
         LocalDate birthDate,
 
+        @NotBlank(message = "La contraseña es obligatoria")
+        String password,
+
         @NotBlank(message = "La dirección es obligatoria")
         @Size(max = 300, message = "La dirección no debe exceder los 300 caracteres")
         String address,

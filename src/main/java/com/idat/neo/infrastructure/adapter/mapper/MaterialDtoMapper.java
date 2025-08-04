@@ -11,7 +11,7 @@ public interface MaterialDtoMapper {
 
     Material toDomain(MaterialRequestDTO dto);
 
-    @Mapping(source = "scheduledCourse.course.name", target = "courseName")
+    @Mapping(source = "scheduledCourse.course.name", target = "nameCourse")
     @Mapping(expression = "java(material.active() ? \"Activo\" : \"Inactivo\")", target = "status")
     MaterialResponseDTO toDto(Material material);
 }

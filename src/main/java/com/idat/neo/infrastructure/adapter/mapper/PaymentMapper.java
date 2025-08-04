@@ -8,9 +8,9 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface PaymentMapper {
 
-    @Mapping(source = "EnrollmentData", target = "Enrollment")
+    @Mapping(source = "enrollmentData", target = "enrollment")
     Payment toDomain(PaymentData entity);
 
-    @Mapping(source = "Enrollment", target = "EnrollmentData")
+    @Mapping(source = "enrollment", target = "enrollmentData")
     PaymentData toEntity(Payment domain);
 }

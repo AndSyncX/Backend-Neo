@@ -28,8 +28,22 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
+    public List<Course> findActive() {
+        return courseDataRepository.findByActiveTrue()
+                .stream()
+                .map(courseMapper::toDomain)
+                .toList();
+    }
+
+    @Override
     public Optional<Course> findById(Long id) {
         return courseDataRepository.findById(id)
+                .map(courseMapper::toDomain);
+    }
+
+    @Override
+    public Optional<Course> findByName(String name) {
+        return courseDataRepository.findByNameIgnoreCase(name)
                 .map(courseMapper::toDomain);
     }
 

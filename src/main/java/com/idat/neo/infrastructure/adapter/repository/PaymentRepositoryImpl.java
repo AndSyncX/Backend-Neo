@@ -34,6 +34,12 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     }
 
     @Override
+    public Optional<Payment> findByStatus(String status) {
+        return paymentDataRepository.findByStatus(status)
+                .map(paymentMapper::toDomain);
+    }
+
+    @Override
     public Payment save(Payment payment, Long enrollmentId) {
         PaymentData entity = paymentMapper.toEntity(payment);
         PaymentData saved = paymentDataRepository.save(entity);

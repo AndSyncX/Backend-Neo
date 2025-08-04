@@ -21,11 +21,11 @@ public class CareerCourseData {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "career_id", nullable = false)
-    private CareerData career;
+    private CareerData careerData;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "course_id", nullable = false)
-    private CourseData course;
+    private CourseData courseData;
 
     @Column(name = "is_mandatory", nullable = false)
     private boolean isMandatory;

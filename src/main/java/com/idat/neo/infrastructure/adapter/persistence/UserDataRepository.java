@@ -11,7 +11,7 @@ public interface UserDataRepository extends JpaRepository<UserData, Long> {
 
     Optional<UserData> findByEmail(String email);
 
-    Optional<UserData> findByName(String name);
+    //Optional<UserData> findByName(String firstName);
 
     @Query("SELECT u FROM UserData u WHERE u.role = 'TEACHER'")
     List<UserData> findAllTeachers();

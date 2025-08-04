@@ -53,13 +53,15 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findByName(String name) {
-        return userDataRepository.findByName(name)
-                .map(userMapper::toDomain);
+        return null;
     }
 
     @Override
     public User save(User user) {
         UserData entity = userMapper.toEntity(user);
+        if (entity.getPassword() == null || entity.getPassword().isBlank()) {
+            throw new IllegalArgumentException("La contraseña no puede ser nula o vacía");
+        }
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         entity.setActive(true);
         UserData saved = userDataRepository.save(entity);

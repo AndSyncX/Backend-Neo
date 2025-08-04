@@ -29,7 +29,7 @@ public class ScheduledCourseData {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "academic_cycle_id", nullable = false)
-    private AcademicCycleData academicCycle;
+    private AcademicCycleData academicCycleData;
 
     @Column(name = "modality", nullable = false, length = 50)
     private String modality;

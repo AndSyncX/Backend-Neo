@@ -8,6 +8,6 @@ public record AssignmentDeliveryResponseDTO(
         String file,
         Long qualification,
         boolean active,
-        String Status // → Activo / Inactivo
+        String status // → Activo / Inactivo
 ) {
 }

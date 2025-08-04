@@ -24,7 +24,7 @@ public class PaymentData {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "enrollment_id", nullable = false)
-    private EnrollmentData enrollment;
+    private EnrollmentData enrollmentData;
 
     @Column(name = "type", nullable = false, length = 30)
     private String type;
