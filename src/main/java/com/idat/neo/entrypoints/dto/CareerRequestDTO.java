@@ -15,6 +15,8 @@ public record CareerRequestDTO(
 
         @NotBlank(message = "Duración de la carrera es obligatorio")
         @Size(max = 20, message = "El año de duración no debe exceder los 10 caracteres")
-        String durationYears
+        String durationYears,
+
+        boolean active
 ) {
 }

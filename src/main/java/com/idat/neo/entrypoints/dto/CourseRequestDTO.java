@@ -17,6 +17,8 @@ public record CourseRequestDTO(
         String code,
 
         @NotNull(message = "El número de créditos es obligatorio")
-        Integer credits
+        Integer credits,
+
+        boolean active
 ) {
 }

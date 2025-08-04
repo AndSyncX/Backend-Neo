@@ -9,8 +9,8 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface CareerDtoMapper {
 
+    //@Mapping(source = "active", target = "active")
     Career toDomain(CareerRequestDTO dto);
 
-    @Mapping(expression = "java(career.active() ? \"Activo\" : \"Inactivo\")", target = "status")
     CareerResponseDTO toDto(Career career);
 }

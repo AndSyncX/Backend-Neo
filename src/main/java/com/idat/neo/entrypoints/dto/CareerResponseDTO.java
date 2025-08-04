@@ -5,7 +5,6 @@ public record CareerResponseDTO(
         String name,
         String faculty,
         String durationYears,
-        boolean active,
-        String status
+        boolean active
 ) {
 }

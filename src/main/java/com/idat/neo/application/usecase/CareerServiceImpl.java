@@ -59,6 +59,6 @@ public class CareerServiceImpl implements CareerService {
 
     @Override
     public void deleteById(Long id) {
-        careerRepository.findById(id);
+        careerRepository.deleteById(id);
     }
 }

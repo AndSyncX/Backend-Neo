@@ -50,7 +50,6 @@ public class CareerRepositoryImpl implements CareerRepository {
     @Override
     public Career save(Career career) {
         CareerData entity = careerMapper.toEntity(career);
-        entity.setActive(true);
         CareerData saved = careerDataRepository.save(entity);
         return careerMapper.toDomain(saved);
     }

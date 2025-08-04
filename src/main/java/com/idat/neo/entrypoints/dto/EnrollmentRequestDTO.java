@@ -14,6 +14,5 @@ public record EnrollmentRequestDTO(
 
         @NotNull(message = "La fecha de matrícula es obligatoria")
         LocalDate enrollmentDate
-
 ) {
 }

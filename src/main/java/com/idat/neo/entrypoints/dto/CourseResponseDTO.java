@@ -5,7 +5,6 @@ public record CourseResponseDTO(
         String name,
         String code,
         Integer credits,
-        boolean active,
-        String status
+        boolean active
 ) {
 }

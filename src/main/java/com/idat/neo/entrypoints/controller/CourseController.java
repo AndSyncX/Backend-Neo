@@ -39,16 +39,15 @@ public class CourseController {
     @PostMapping
     public ResponseEntity<CourseResponseDTO> createCourse(@RequestBody @Valid CourseRequestDTO requestDTO) {
         Course courseToSave = courseDtoMapper.toDomain(requestDTO);
-        /*Course savedCourse = courseService.save(courseToSave, requestDTO.userId());*/
-        return null; /*ResponseEntity.status(HttpStatus.CREATED).body(courseDtoMapper.toDto(savedCourse));*/
+        Course savedCourse = courseService.save(courseToSave);
+        return ResponseEntity.status(HttpStatus.CREATED).body(courseDtoMapper.toDto(savedCourse));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CourseResponseDTO> updateCourse(@PathVariable Long id,
                                                       @RequestBody @Valid CourseRequestDTO requestDTO) {
         Course courseToUpdate = courseDtoMapper.toDomain(requestDTO);
-        /*Course updatedCourse = courseService.update(id, courseToUpdate, requestDTO.userId());*/
-       /* return ResponseEntity.ok(courseDtoMapper.toDto(updatedCourse));*/
-        return null;
+        Course updatedCourse = courseService.update(id, courseToUpdate);
+        return ResponseEntity.ok(courseDtoMapper.toDto(updatedCourse));
     }
 }
